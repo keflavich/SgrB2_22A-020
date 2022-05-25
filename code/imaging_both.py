@@ -55,12 +55,13 @@ for spw in (30,31):
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
                robust=2, parallel=True)
 
-if not os.path.exists(vis.replace(".ms", "_spw30_NaCl.split")):
-    split(vis=vis, outputvis=vis.replace(".ms", "_spw30_NaCl.split"),
-          width=8, field='sgr b2b', spw='30')
+for vv in vis:
+    if not os.path.exists(vv.replace(".ms", "_spw30_NaCl.split")):
+        split(vis=vv, outputvis=vv.replace(".ms", "_spw30_NaCl.split"),
+              width=8, field='sgr b2b', spw='30')
 for spw in (30,):
     if not os.path.exists(f'allEBs.center.robust2.downsample.spw{spw}.big-coarse.clean.psf'):
-        tclean(vis=vis.replace(".ms", "_spw30_NaCl.split"),
+        tclean(vis=[vv.replace(".ms", "_spw30_NaCl.split") for vv in vis],
                imagename=f'allEBs.center.robust2.downsample.spw{spw}.big-coarse.clean',
                niter=2000000, threshold='10mJy', field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
