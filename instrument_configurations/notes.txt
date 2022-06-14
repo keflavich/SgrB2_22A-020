@@ -1,0 +1,5 @@
+
+K-band basebands:
+
+25.600GHz
+22.600GHz
