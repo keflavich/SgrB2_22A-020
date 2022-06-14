@@ -1,28 +1,16 @@
 # Line name ; Rest frequency ; Rest frame ; Velocity convention ; Velocity ; Minimum range ; Channel separation ; Polarization products ; Additional specifications
-NH311; 23.69447GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NH322; 23.7226GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=false
-NH377; 25.715182GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=false
-NH344; 24.13935GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=false
-NH355; 24.53292GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=false
-H2O; 22.23508GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.1km/s; DUAL; USE_RECIRCULATION=true
 NH321; 23.09885GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.5km/s; DUAL; USE_RECIRCULATION=true
 NH332; 22.83422GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.5km/s; DUAL; USE_RECIRCULATION=true
 NH365; 22.73249GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.5km/s; DUAL; USE_RECIRCULATION=true
 NH343; 22.68835GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.5km/s; DUAL; USE_RECIRCULATION=true
-NH353; 21.285275GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NH363; 19.757538GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 NH354; 22.653022GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NH374; 19.218465GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NH375; 20.80483GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NH385; 18.808507GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 NH376; 22.92494GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NH398; 23.657471GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 NaCl v=0 2-1; 26.0518979GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.5km/s; DUAL; USE_RECIRCULATION=true
 NaCl v=1 2-1; 25.8582961GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 NaCl v=2 2-1; 25.6659289GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 NaCl v=3 2-1; 25.4747961GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 NaCl v=4 2-1; 25.2848979GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-NaCl v=5 J=2-1; 25.094473523419854GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
+NaCl v=5 2-1; 25.094473523419854GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 KCl v=0 J=3-2; 23.06673183384698GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.5km/s; DUAL; USE_RECIRCULATION=true
 KCl v=1 J=3-2; 22.92547086281787GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 KCl v=2 J=3-2; 22.784392821505953GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
@@ -30,7 +18,8 @@ KCl v=3 J=3-2; 22.643437751407GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.
 KCl v=4 J=3-2; 22.50263563178571GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 KCl v=5 J=3-2; 22.361956483375568GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 KCl v=6 J=3-2; 22.221460264687586GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
-KCl v=7 J=3-2; 22.08108701721079GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
+NH377; 25.715182GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true`
+H2O; 22.23508GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 0.1km/s; DUAL; USE_RECIRCULATION=true
 Na37Cl v=0 J=2-1; 25.494560483040605GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 Na37Cl v=1 J=2-1; 25.30701032131401GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 Na37Cl v=2 J=2-1; 25.12065932941914GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
