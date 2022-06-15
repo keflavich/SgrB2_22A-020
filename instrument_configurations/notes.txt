@@ -3,3 +3,7 @@ K-band basebands:
 
 25.600GHz
 22.600GHz
+
+Ku-band:
+12.6
+14.9
