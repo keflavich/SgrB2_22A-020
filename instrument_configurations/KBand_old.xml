@@ -1,0 +1,2546 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resourceCatalog xmlns="http://www.nrao.edu/namespaces/sss" xmlns:ns2="http://www.nrc.ca/namespaces/widar" id="4020779" name="22A-020" owner="808">
+<notes/>
+<userPriorities>
+<userPriority userId="60" value="0"/>
+<userPriority userId="808" value="0"/>
+<userPriority userId="5829" value="0"/>
+</userPriorities>
+<createdBy>808</createdBy>
+<createdOn>2022-01-24T20:16:45.979Z</createdOn>
+<lastUpdatedBy>808</lastUpdatedBy>
+<lastUpdatedOn>2022-02-06T18:04:12.864Z</lastUpdatedOn>
+<entries>
+<resource xmlId="resource-623ec90e-1e55-4afc-9e02-ef2763dcecd5" id="4030013" name="KBandSalts">
+<createdBy>-1</createdBy>
+<createdOn>2022-02-06T18:04:12.818Z</createdOn>
+<lastUpdatedBy>-1</lastUpdatedBy>
+<lastUpdatedOn>2022-02-06T18:04:12.818Z</lastUpdatedOn>
+<userDefinedValues>
+<userDefinedValue key="CAPABILITY_MODE" value="GENERAL_OBSERVING"/>
+<userDefinedValue key="DOPPLER_POSITION" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&#xA;&lt;sss:simpleSkyPosition coordinateSystem=&quot;EQUATORIAL&quot; epoch=&quot;J2000&quot; xmlns:sss=&quot;http://www.nrao.edu/namespaces/sss&quot;&gt;&#xA;    &lt;sss:originOfInformation&gt;&lt;/sss:originOfInformation&gt;&#xA;    &lt;sss:distance units=&quot;KILOMETER&quot; value=&quot;0&quot;/&gt;&#xA;    &lt;sss:distanceUncertainty units=&quot;KILOMETER&quot; value=&quot;0&quot;/&gt;&#xA;    &lt;sss:latitude increasesNorthward=&quot;true&quot; value=&quot;-102187&quot; units=&quot;ARC_SECOND&quot;/&gt;&#xA;    &lt;sss:latitudeUncertainty increasesNorthward=&quot;true&quot; value=&quot;0&quot; units=&quot;DEGREE&quot;/&gt;&#xA;    &lt;sss:longitude increasesEastward=&quot;true&quot; value=&quot;64040&quot; units=&quot;SECOND&quot;/&gt;&#xA;    &lt;sss:longitudeUncertainty increasesEastward=&quot;true&quot; value=&quot;0&quot; units=&quot;DEGREE&quot;/&gt;&#xA;&lt;/sss:simpleSkyPosition&gt;&#xA;"/>
+<userDefinedValue key="INTEGRATION_TIME" value="2.0"/>
+</userDefinedValues>
+<notes>
+<note>Salt.  Extra lines leftover from previous NH3</note>
+</notes>
+<scienceSpecification>
+<pulsarSpecs/>
+<skyFrequencySpecs/>
+<spectralLineSpecs>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="23.69447"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH311</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="200"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="23.7226"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH322</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="false"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.715182"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH377</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="false"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="24.13935"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH344</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="95"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="false"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="24.53292"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH355</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="95"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="false"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.23508"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>H2O</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="200"/>
+<velocityResolution units="km/s" value="0.1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="23.09885"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH321</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="0.5"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.83422"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH332</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="0.5"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.73249"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH365</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="0.5"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.68835"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH343</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="0.5"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="21.285275"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH353</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="19.757538"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH363</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.653022"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH354</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="19.218465"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH374</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="20.80483"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH375</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="18.808507"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH385</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.92494"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH376</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="23.657471"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NH398</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.2848979"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NaCl v=4 2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.3072535"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>Na37Cl v=4 2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="26.0518979"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NaCl v=0 2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="200"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.8582961"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NaCl v=1 2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="200"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.6659289"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NaCl v=2 2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="200"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.4747961"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NaCl v=3 2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="200"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="23.06673183384698"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=0 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.92547086281787"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=1 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.784392821505953"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=2 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.643437751407"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=3 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.50263563178571"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=4 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.361956483375568"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=5 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.221460264687586"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=6 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.08108701721079"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>KCl v=7 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.094473523419854"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>NaCl v=5 J=2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.494560483040605"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>Na37Cl v=0 J=2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.30701032131401"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>Na37Cl v=1 J=2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="25.12065932941914"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>Na37Cl v=2 J=2-1</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.4098759656954"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>K37Cl v=0 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.274279836943606"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>K37Cl v=1 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.13928329310511"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>K37Cl v=2 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.0048863341799"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>K37Cl v=3 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.5342298772738"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>41KCl v=0 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.397494537179227"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>41KCl v=1 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.261388761246053"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>41KCl v=2 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+<spectralLineSpecification>
+<dopplerSpecs name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecs>
+<line>
+<frequency units="GIGAHERTZ" value="22.125852590983413"/>
+<sourceOfInformation>
+</sourceOfInformation>
+<species>41KCl v=3 J=3-2</species>
+<transition>
+</transition>
+<uncertainty units="GIGAHERTZ" value="0"/>
+</line>
+<polarizationProducts>RR LL</polarizationProducts>
+<timeResolution units="MILLISECOND" value="0"/>
+<velocityBandwidth units="km/s" value="100"/>
+<velocityResolution units="km/s" value="1"/>
+<additionalSpecifications>
+<additionalSpecification key="USE_RECIRCULATION" value="true"/>
+</additionalSpecifications>
+</spectralLineSpecification>
+</spectralLineSpecs>
+</scienceSpecification>
+<telescope>EVLA</telescope>
+<evlaAntennaElectronics>
+<receiver>EVLA_K</receiver>
+<timeOfLastTuning>2000-02-01T00:00:00.031Z</timeOfLastTuning>
+<tuningSpecifications>
+<tuningSpecification dormant="false" freqIsRest="true" name="A0/C0">
+<dopplerSpecifications name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecifications>
+<frequency units="GIGAHERTZ" value="26.0518979"/>
+<offset units="GIGAHERTZ" value="0.449375240630956720486401348748451315900015069759"/>
+<offsetSign>-1</offsetSign>
+</tuningSpecification>
+<tuningSpecification dormant="false" freqIsRest="true" name="B0/D0">
+<dopplerSpecifications name="">
+<simpleSkyPosition coordinateSystem="EQUATORIAL" epoch="J2000">
+<originOfInformation>
+</originOfInformation>
+<distance units="KILOMETER" value="0"/>
+<distanceUncertainty units="KILOMETER" value="0"/>
+<latitude increasesNorthward="true" value="-102187" units="ARC_SECOND"/>
+<latitudeUncertainty increasesNorthward="true" value="0" units="DEGREE"/>
+<longitude increasesEastward="true" value="64040" units="SECOND"/>
+<longitudeUncertainty increasesEastward="true" value="0" units="DEGREE"/>
+</simpleSkyPosition>
+<velocity restFrame="LSR_KINEMATIC" velocityConvention="RADIO">
+<radialVelocity units="km/s" value="60"/>
+</velocity>
+</dopplerSpecifications>
+<frequency units="GIGAHERTZ" value="24.53292"/>
+<offset units="GIGAHERTZ" value="1.930544426415090884689642721835550271247984497328"/>
+<offsetSign>-1</offsetSign>
+</tuningSpecification>
+</tuningSpecifications>
+</evlaAntennaElectronics>
+<backendElectronics>
+<evlaWidarConfiguration>
+<pulsar>
+<constPeriod>0.1</constPeriod>
+<parFile>true</parFile>
+<pulsarConfiguration>NONE</pulsarConfiguration>
+<pulsarObserving>
+<channelCount>1</channelCount>
+<foldingDumpTime>1.0</foldingDumpTime>
+<outputBitCount>8</outputBitCount>
+<polarizationProductsSavedCount>1</polarizationProductsSavedCount>
+<pulsarObservingMode>FOLD</pulsarObservingMode>
+<pulsePhaseBinCount>1</pulsePhaseBinCount>
+<timeResolution>1.0</timeResolution>
+</pulsarObserving>
+<pulsarPhaseBinning>
+<numBins>1</numBins>
+</pulsarPhaseBinning>
+</pulsar>
+<basebands>
+<widarBasebandPair>
+<bandwidth units="GIGAHERTZ" value="1.024"/>
+<singlePhaseCenter>true</singlePhaseCenter>
+<subbands>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="0" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="2" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="186449511"/>
+<highFrequency units="HERTZ" value="202449511"/>
+</frequencyRange>
+<comments>Generated from NaCl v=4 2-1 - 25.2848979GHz</comments>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-b4b04784-2610-4e0f-8406-87f09d19818c">
+<correlationProducts>
+<product correlation="RR" channels="256"/>
+<product correlation="LL" channels="256"/>
+</correlationProducts>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="5120" recirculationFactor="2">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="1" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="208802946"/>
+<highFrequency units="HERTZ" value="224802946"/>
+</frequencyRange>
+<comments>Generated from Na37Cl v=4 2-1 - 25.3072535GHz</comments>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-e48ddcbb-302f-4b23-acb9-6a3d958ea07e">
+<correlationProducts>
+<product correlation="RR" channels="256"/>
+<product correlation="LL" channels="256"/>
+</correlationProducts>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="5120" recirculationFactor="2">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="2" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="736000000"/>
+<highFrequency units="HERTZ" value="768000000"/>
+</frequencyRange>
+<comments>Generated from NaCl v=1 2-1 - 25.8582961GHz</comments>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-d7eaab32-9461-4599-a71d-a138e06a3caa">
+<correlationProducts>
+<product correlation="RR" channels="512"/>
+<product correlation="LL" channels="512"/>
+</correlationProducts>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="2560" recirculationFactor="4">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="3" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="559443615"/>
+<highFrequency units="HERTZ" value="591443615"/>
+</frequencyRange>
+<comments>Generated from NaCl v=2 2-1 - 25.6659289GHz</comments>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-2eaa2d9e-77e7-4233-9f7a-26ab493dac77">
+<correlationProducts>
+<product correlation="RR" channels="512"/>
+<product correlation="LL" channels="512"/>
+</correlationProducts>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="2560" recirculationFactor="4">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="4" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="945375241"/>
+<highFrequency units="HERTZ" value="977375241"/>
+</frequencyRange>
+<comments>Generated from NaCl v=0 2-1 - 26.0518979GHz</comments>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-5f8264af-3428-4312-9360-53511aeb0d79">
+<correlationProducts>
+<product correlation="RR" channels="1024"/>
+<product correlation="LL" channels="1024"/>
+</correlationProducts>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="2560" recirculationFactor="4">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="5" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="384000000"/>
+<highFrequency units="HERTZ" value="416000000"/>
+</frequencyRange>
+<comments>Generated from NaCl v=3 2-1 - 25.4747961GHz</comments>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-249017cf-dded-429b-98e8-f924f1727754">
+<correlationProducts>
+<product correlation="RR" channels="512"/>
+<product correlation="LL" channels="512"/>
+</correlationProducts>
+<frequencyAveraging>512 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="2560" recirculationFactor="4">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="6" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="0"/>
+<highFrequency units="MEGAHERTZ" value="128"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-330a4b00-762b-4561-b1aa-3d0ddda962ee">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="7" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="128"/>
+<highFrequency units="MEGAHERTZ" value="256"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-5a514452-a5f2-4f3b-9f92-252423883aa2">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="8" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="256000000"/>
+<highFrequency units="HERTZ" value="384000000"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-a51f2a3b-f4f1-4c48-aa28-33c198574f23">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="9" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="384000000"/>
+<highFrequency units="HERTZ" value="512000000"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-f6582374-f659-4321-9a83-dda6068be97f">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="10" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="640000000"/>
+<highFrequency units="HERTZ" value="768000000"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-a440b6a8-3d81-450a-8974-aac9a603000d">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="11" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="768000000"/>
+<highFrequency units="HERTZ" value="896000000"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-2e9df9c2-d6e5-4e36-aa52-c47dce5ecd73">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="12" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="4" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="512000000"/>
+<highFrequency units="HERTZ" value="640000000"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-710390c9-2158-493a-affd-8f655514c33e">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="13" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="896000000"/>
+<highFrequency units="HERTZ" value="1024000000"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-18df0675-0465-4f30-a2a5-374e1a5be097">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="14" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="396091792"/>
+<highFrequency units="HERTZ" value="412091792"/>
+</frequencyRange>
+<comments>Generated from Na37Cl v=0 J=2-1 - 25.494560483040605GHz</comments>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-3a5a319e-4cf6-4202-be18-93ab4b711fbb">
+<correlationProducts>
+<product correlation="RR" channels="256"/>
+<product correlation="LL" channels="256"/>
+</correlationProducts>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="5120" recirculationFactor="2">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="15" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="208559791"/>
+<highFrequency units="HERTZ" value="224559791"/>
+</frequencyRange>
+<comments>Generated from Na37Cl v=1 J=2-1 - 25.30701032131401GHz</comments>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-8caddbf4-2317-43ba-8135-3ff0513eb00f">
+<correlationProducts>
+<product correlation="RR" channels="256"/>
+<product correlation="LL" channels="256"/>
+</correlationProducts>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="5120" recirculationFactor="2">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="16" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="10" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="616691946"/>
+<highFrequency units="HERTZ" value="632691946"/>
+</frequencyRange>
+<comments>Generated from NH377 - 25.715182GHz</comments>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-ef694a09-1ee9-4749-99ef-79d67259c333">
+<correlationProducts>
+<product correlation="RR" channels="256"/>
+<product correlation="LL" channels="256"/>
+</correlationProducts>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+</subbands>
+<inputSignalA bitDepth="8" polarization="R" proxyIsReversed="false" devicePath="EVLA_K-R:mix-down:S1-1:UX.BOTTOM.direct-path-filter:UX.BOTTOM.output-switch-1:S3-1:T304-A.input-filter:T304-A.LO1-mixer:0.0GHz - 5.0GHz:2.048GHz - 4.096GHz:T304-A.internal-LO-mixer:1.024GHz - 2.048GHz:T304-A.internal-LO-switch:T304-A.LO1-output-switch:T304-A.output-0-filter:A0">
+<proxiedRange>
+<lowFrequency units="GIGAHERTZ" value="25.088"/>
+<highFrequency units="GIGAHERTZ" value="26.112"/>
+</proxiedRange>
+<currentRange>
+<lowFrequency units="GIGAHERTZ" value="0"/>
+<highFrequency units="GIGAHERTZ" value="1.024"/>
+</currentRange>
+<samplingRate units="GIGAHERTZ" value="2.048"/>
+</inputSignalA>
+<inputSignalB bitDepth="8" polarization="L" proxyIsReversed="false" devicePath="EVLA_K-L:mix-down:S1-2:UX.TOP.direct-path-filter:UX.TOP.output-switch-1:S3-2:T304-C.input-filter:T304-C.LO1-mixer:0.0GHz - 5.0GHz:2.048GHz - 4.096GHz:T304-C.internal-LO-mixer:1.024GHz - 2.048GHz:T304-C.internal-LO-switch:T304-C.LO1-output-switch:T304-C.output-0-filter:C0">
+<proxiedRange>
+<lowFrequency units="GIGAHERTZ" value="25.088"/>
+<highFrequency units="GIGAHERTZ" value="26.112"/>
+</proxiedRange>
+<currentRange>
+<lowFrequency units="GIGAHERTZ" value="0"/>
+<highFrequency units="GIGAHERTZ" value="1.024"/>
+</currentRange>
+<samplingRate units="GIGAHERTZ" value="2.048"/>
+</inputSignalB>
+</widarBasebandPair>
+<widarBasebandPair>
+<bandwidth units="GIGAHERTZ" value="1.024"/>
+<singlePhaseCenter>true</singlePhaseCenter>
+<subbands>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="0" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="0"/>
+<highFrequency units="MEGAHERTZ" value="128"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-450703c9-b930-4e95-9646-363d424905bd">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="1" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="128"/>
+<highFrequency units="MEGAHERTZ" value="256"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-2d191f68-99fa-4889-91e1-4c86d48c58bc">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="2" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="256"/>
+<highFrequency units="MEGAHERTZ" value="384"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-db175051-e151-4a88-95e0-1ecfb48ad139">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="3" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="384"/>
+<highFrequency units="MEGAHERTZ" value="512"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-f614012d-a4cf-4182-9558-184edac804d5">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="4" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="512"/>
+<highFrequency units="MEGAHERTZ" value="640"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-eafabdf2-37a2-4131-916a-e9241c87944f">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="5" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="640"/>
+<highFrequency units="MEGAHERTZ" value="768"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-02e0943e-4923-4ca5-93fb-30407920bea7">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="6" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="768"/>
+<highFrequency units="MEGAHERTZ" value="896"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-ac4b4ef7-cd6a-4a93-a99d-d6978ca5a9d2">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="7" signalToNoiseRatio="0" useStage2Mixer="false" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="false">
+<frequencyRange>
+<lowFrequency units="MEGAHERTZ" value="896"/>
+<highFrequency units="MEGAHERTZ" value="1024"/>
+</frequencyRange>
+<comments>
+</comments>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-135c8a32-67c1-47b5-aea3-907702c06bea">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 1MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="8" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="972498234"/>
+<highFrequency units="HERTZ" value="980498234"/>
+</frequencyRange>
+<comments>Generated from KCl v=0 J=3-2 - 23.06673183384698GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-758e398f-8c3d-4fc3-b639-d805dbf81a59">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="9" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="831250942"/>
+<highFrequency units="HERTZ" value="839250942"/>
+</frequencyRange>
+<comments>Generated from KCl v=1 J=3-2 - 22.92547086281787GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-5c0170e1-992d-4b48-ab85-d308f270bd6a">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="10" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="690186561"/>
+<highFrequency units="HERTZ" value="698186561"/>
+</frequencyRange>
+<comments>Generated from KCl v=2 J=3-2 - 22.784392821505953GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-0b66e8d2-d50c-4dda-b7d1-8b9d7bb721c5">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="11" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="549245140"/>
+<highFrequency units="HERTZ" value="557245140"/>
+</frequencyRange>
+<comments>Generated from KCl v=3 J=3-2 - 22.643437751407GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-4f3ddff9-718a-4f0f-beb6-bcdc21d5189d">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="12" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="315705971"/>
+<highFrequency units="HERTZ" value="323705971"/>
+</frequencyRange>
+<comments>Generated from K37Cl v=0 J=3-2 - 22.4098759656954GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-19d64e08-0619-4550-a3d8-5c78422207c4">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="13" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="180122972"/>
+<highFrequency units="HERTZ" value="188122972"/>
+</frequencyRange>
+<comments>Generated from K37Cl v=1 J=3-2 - 22.274279836943606GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-33ffe752-76be-450d-9ea1-da35c6baeabd">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="14" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="440047841"/>
+<highFrequency units="HERTZ" value="448047841"/>
+</frequencyRange>
+<comments>Generated from 41KCl v=0 J=3-2 - 22.5342298772738GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-138bb96e-ceaf-440b-9aeb-ec5f79bd0b62">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="15" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="1" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="303325741"/>
+<highFrequency units="HERTZ" value="311325741"/>
+</frequencyRange>
+<comments>Generated from 41KCl v=1 J=3-2 - 22.397494537179227GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-78c4250b-167d-4e28-845f-c852ab5c6559">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="16" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="2" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="167233145"/>
+<highFrequency units="HERTZ" value="175233145"/>
+</frequencyRange>
+<comments>Generated from 41KCl v=2 J=3-2 - 22.261388761246053GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-fb526fb1-c99c-4d15-acd1-d74fc55e8c03">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="17" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="3" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="31710099"/>
+<highFrequency units="HERTZ" value="39710099"/>
+</frequencyRange>
+<comments>Generated from 41KCl v=3 J=3-2 - 22.125852590983413GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-ba7dc12a-78aa-458e-b216-1b4c0e96661e">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="18" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="2" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="45139500"/>
+<highFrequency units="HERTZ" value="53139500"/>
+</frequencyRange>
+<comments>Generated from K37Cl v=2 J=3-2 - 22.13928329310511GHz</comments>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-ff9b1eea-1dd0-4bff-ad72-d9969d1d737a">
+<correlationProducts>
+<product correlation="RR" channels="128"/>
+<product correlation="LL" channels="128"/>
+</correlationProducts>
+<frequencyAveraging>128 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="2" ccMult="1" ltaMult="2500" recirculationFactor="1">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="400"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="19" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="0" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="136926931"/>
+<highFrequency units="HERTZ" value="152926931"/>
+</frequencyRange>
+<comments>Generated from H2O - 22.23508GHz</comments>
+<frequencyAveraging>3072 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-55d4ab05-7c65-443d-9d4d-cd17b77c7313">
+<correlationProducts>
+<product correlation="RR" channels="3072"/>
+<product correlation="LL" channels="3072"/>
+</correlationProducts>
+<frequencyAveraging>3072 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="1280" recirculationFactor="8">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+<widarSubband fringeRotateInFilterChip="false" mixerPhaseErrorCorr="false" sbId="20" signalToNoiseRatio="0" useStage2Mixer="true" requantizationBits="4" priority="10" fixedChannels="false" resistBasebandShift="true">
+<frequencyRange>
+<lowFrequency units="HERTZ" value="1004613290"/>
+<highFrequency units="HERTZ" value="1012613290"/>
+</frequencyRange>
+<comments>Generated from NH321 - 23.09885GHz</comments>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<summedArrayMode>NONE</summedArrayMode>
+<correlationProductGroups>
+<group uuid="CPG-834eaae4-070c-49ce-b408-a72e706ea49e">
+<correlationProducts>
+<product correlation="RR" channels="256"/>
+<product correlation="LL" channels="256"/>
+</correlationProducts>
+<frequencyAveraging>256 x 0MHz</frequencyAveraging>
+<integrationTime cbeMult="1" ccMult="1" ltaMult="5120" recirculationFactor="2">
+<minimumHardwareIntegrationTime units="MICROSECOND" value="195.3125"/>
+</integrationTime>
+<ns2:productPacking algorithm="maxPack"/>
+<ns2:stationPacking algorithm="maxPack"/>
+</group>
+</correlationProductGroups>
+</widarSubband>
+</subbands>
+<inputSignalA bitDepth="8" polarization="R" proxyIsReversed="false" devicePath="EVLA_K-R:mix-down:S1-1:UX.BOTTOM.direct-path-filter:UX.BOTTOM.output-switch-1:UX.BOTTOM.output-switch-2:S4-1:T304-B.input-filter:T304-B.LO1-mixer:0.0GHz - 5.0GHz:2.048GHz - 4.096GHz:T304-B.internal-LO-mixer:1.024GHz - 2.048GHz:T304-B.internal-LO-switch:T304-B.LO1-output-switch:T304-B.output-0-filter:B0">
+<proxiedRange>
+<lowFrequency units="GIGAHERTZ" value="22.088"/>
+<highFrequency units="GIGAHERTZ" value="23.112"/>
+</proxiedRange>
+<currentRange>
+<lowFrequency units="GIGAHERTZ" value="0"/>
+<highFrequency units="GIGAHERTZ" value="1.024"/>
+</currentRange>
+<samplingRate units="GIGAHERTZ" value="2.048"/>
+</inputSignalA>
+<inputSignalB bitDepth="8" polarization="L" proxyIsReversed="false" devicePath="EVLA_K-L:mix-down:S1-2:UX.TOP.direct-path-filter:UX.TOP.output-switch-1:UX.TOP.output-switch-2:S4-2:T304-D.input-filter:T304-D.LO1-mixer:0.0GHz - 5.0GHz:2.048GHz - 4.096GHz:T304-D.internal-LO-mixer:1.024GHz - 2.048GHz:T304-D.internal-LO-switch:T304-D.LO1-output-switch:T304-D.output-0-filter:D0">
+<proxiedRange>
+<lowFrequency units="GIGAHERTZ" value="22.088"/>
+<highFrequency units="GIGAHERTZ" value="23.112"/>
+</proxiedRange>
+<currentRange>
+<lowFrequency units="GIGAHERTZ" value="0"/>
+<highFrequency units="GIGAHERTZ" value="1.024"/>
+</currentRange>
+<samplingRate units="GIGAHERTZ" value="2.048"/>
+</inputSignalB>
+</widarBasebandPair>
+</basebands>
+<maxAntennaCount>27</maxAntennaCount>
+<vdifRecording>false</vdifRecording>
+<baselineBoardPool>
+<owner blbpCount="1" id="CPG-834eaae4-070c-49ce-b408-a72e706ea49e"/>
+<owner blbpCount="1" id="CPG-330a4b00-762b-4561-b1aa-3d0ddda962ee"/>
+<owner blbpCount="1" id="CPG-ba7dc12a-78aa-458e-b216-1b4c0e96661e"/>
+<owner blbpCount="1" id="CPG-135c8a32-67c1-47b5-aea3-907702c06bea"/>
+<owner blbpCount="1" id="CPG-4f3ddff9-718a-4f0f-beb6-bcdc21d5189d"/>
+<owner blbpCount="1" id="CPG-b4b04784-2610-4e0f-8406-87f09d19818c"/>
+<owner blbpCount="1" id="CPG-e48ddcbb-302f-4b23-acb9-6a3d958ea07e"/>
+<owner blbpCount="1" id="CPG-02e0943e-4923-4ca5-93fb-30407920bea7"/>
+<owner blbpCount="1" id="CPG-ac4b4ef7-cd6a-4a93-a99d-d6978ca5a9d2"/>
+<owner blbpCount="2" id="CPG-5f8264af-3428-4312-9360-53511aeb0d79"/>
+<owner blbpCount="1" id="CPG-f6582374-f659-4321-9a83-dda6068be97f"/>
+<owner blbpCount="1" id="CPG-18df0675-0465-4f30-a2a5-374e1a5be097"/>
+<owner blbpCount="1" id="CPG-8caddbf4-2317-43ba-8135-3ff0513eb00f"/>
+<owner blbpCount="1" id="CPG-78c4250b-167d-4e28-845f-c852ab5c6559"/>
+<owner blbpCount="1" id="CPG-138bb96e-ceaf-440b-9aeb-ec5f79bd0b62"/>
+<owner blbpCount="1" id="CPG-3a5a319e-4cf6-4202-be18-93ab4b711fbb"/>
+<owner blbpCount="2" id="CPG-ef694a09-1ee9-4749-99ef-79d67259c333"/>
+<owner blbpCount="1" id="CPG-5a514452-a5f2-4f3b-9f92-252423883aa2"/>
+<owner blbpCount="1" id="CPG-2e9df9c2-d6e5-4e36-aa52-c47dce5ecd73"/>
+<owner blbpCount="1" id="CPG-758e398f-8c3d-4fc3-b639-d805dbf81a59"/>
+<owner blbpCount="1" id="CPG-ff9b1eea-1dd0-4bff-ad72-d9969d1d737a"/>
+<owner blbpCount="1" id="CPG-fb526fb1-c99c-4d15-acd1-d74fc55e8c03"/>
+<owner blbpCount="1" id="CPG-19d64e08-0619-4550-a3d8-5c78422207c4"/>
+<owner blbpCount="1" id="CPG-d7eaab32-9461-4599-a71d-a138e06a3caa"/>
+<owner blbpCount="1" id="CPG-0b66e8d2-d50c-4dda-b7d1-8b9d7bb721c5"/>
+<owner blbpCount="1" id="CPG-33ffe752-76be-450d-9ea1-da35c6baeabd"/>
+<owner blbpCount="1" id="CPG-db175051-e151-4a88-95e0-1ecfb48ad139"/>
+<owner blbpCount="1" id="CPG-a51f2a3b-f4f1-4c48-aa28-33c198574f23"/>
+<owner blbpCount="1" id="CPG-710390c9-2158-493a-affd-8f655514c33e"/>
+<owner blbpCount="1" id="CPG-249017cf-dded-429b-98e8-f924f1727754"/>
+<owner blbpCount="3" id="CPG-55d4ab05-7c65-443d-9d4d-cd17b77c7313"/>
+<owner blbpCount="1" id="CPG-a440b6a8-3d81-450a-8974-aac9a603000d"/>
+<owner blbpCount="1" id="CPG-5c0170e1-992d-4b48-ab85-d308f270bd6a"/>
+<owner blbpCount="1" id="CPG-2d191f68-99fa-4889-91e1-4c86d48c58bc"/>
+<owner blbpCount="1" id="CPG-eafabdf2-37a2-4131-916a-e9241c87944f"/>
+<owner blbpCount="1" id="CPG-f614012d-a4cf-4182-9558-184edac804d5"/>
+<owner blbpCount="1" id="CPG-450703c9-b930-4e95-9646-363d424905bd"/>
+<owner blbpCount="1" id="CPG-2eaa2d9e-77e7-4233-9f7a-26ab493dac77"/>
+</baselineBoardPool>
+</evlaWidarConfiguration>
+</backendElectronics>
+</resource>
+</entries>
+<resourceGroups/>
+</resourceCatalog>
