@@ -8,6 +8,15 @@ vis = ['../22A-020_sb41852157_1_1.59747.288797835645/22A-020_sb41852157_1_1.5974
 
 contspw = [18,19,20,21,22,23,24,25,30,31,32,33,34,46,47,48]
 
+for robust in (0, 2):
+    if not os.path.exists(f'KbandAarray.center.robust{robust}.continuum.big-coarse.liteclean.psf.tt0'):
+        tclean(vis=vis,
+               imagename=f'KbandAarray.center.robust{robust}.continuum.big-coarse.liteclean',
+               niter=10000, spw=",".join(map(str, contspw)), field='sgr b2b', imsize=[2000],
+               cell=['0.05arcsec'], specmode='mfs', deconvolver='mtmfs', weighting='briggs',
+               robust=robust, parallel=False)
+
+
 for spw in (45,):
     for robust in (0, 2):
         if not os.path.exists(f'KbandAarray.center.robust{robust}.spw{spw}.big-coarse.liteclean.psf'):
@@ -15,7 +24,7 @@ for spw in (45,):
                    imagename=f'KbandAarray.center.robust{robust}.spw{spw}.big-coarse.liteclean',
                    niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
                    cell=['0.05arcsec'], specmode='cube', weighting='briggs',
-                   robust=2, parallel=False)
+                   robust=robust, parallel=False)
 
 for spw in (range(48,2,-1)):
     if spw in contspw:
@@ -35,12 +44,4 @@ for spw in (range(48,2,-1)):
                cell=['0.02arcsec'], specmode='cube', weighting='briggs',
                robust=0.5, parallel=False)
 
-
-
-if not os.path.exists(f'KbandAarray.center.robust{robust}.continuum.big-coarse.liteclean.psf'):
-    tclean(vis=vis,
-           imagename=f'KbandAarray.center.robust{robust}.continuum.big-coarse.liteclean',
-           niter=1000, spw=",".join(map(str,contspw)), field='sgr b2b', imsize=[2000],
-           cell=['0.05arcsec'], specmode='mfs', weighting='briggs',
-           robust=2, parallel=False)
 

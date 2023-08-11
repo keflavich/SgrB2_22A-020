@@ -14,11 +14,12 @@ contspw = [4,5,6,7,8,9,10,11, 27,28,29,30,31,32,33,34]
 # 4-11, 27-34
 
 for robust in (0,2):
-    if not os.path.exists(f'KbandDarray.center.robust{robust}.continuum.big-coarse.liteclean.psf'):
+    if not os.path.exists(f'KbandDarray.center.robust{robust}.continuum.big-coarse.liteclean.psf.tt0'):
         tclean(vis=vis,
                imagename=f'KbandDarray.center.robust{robust}.continuum.big-coarse.liteclean',
                niter=1000, spw=",".join(map(str,contspw)), field='sgr b2b', imsize=[700],
                cell=['0.25arcsec'], specmode='mfs', weighting='briggs',
+               deconvolver='mtmfs',
                nterms=2,
                robust=robust, parallel=False)
 

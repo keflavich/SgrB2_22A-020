@@ -10,11 +10,12 @@ vis = ['../22A-020_sb41854545_1_1.59783.16907671296/22A-020_sb41854545_1_1.59783
 contspw = [0,2,3,4,6,9,30,31,32]
 
 for robust in (0,2):
-    if not os.path.exists(f'KubandDarray.center.robust{robust}.continuum.big-coarse.liteclean.psf'):
+    if not os.path.exists(f'KubandDarray.center.robust{robust}.continuum.big-coarse.liteclean.psf.tt0'):
         tclean(vis=vis,
                imagename=f'KubandDarray.center.robust{robust}.continuum.big-coarse.liteclean',
                niter=1000, spw=",".join(map(str,contspw)), field='sgr b2b', imsize=[600],
                cell=['0.5arcsec'], specmode='mfs', weighting='briggs',
+               deconvolver='mtmfs',
                nterms=2,
                robust=robust, parallel=False)
 
