@@ -21,6 +21,7 @@ with np.errstate(all='ignore'):
                     print(fn, frq)
                     cube = cube[int(cube.shape[0]*0.05):int(cube.shape[0]*0.95),:,:]
                     med = cube.median(axis=0)
+                    med.write(f'{fn}.cont.fits')
                     msub = cube-med
                     msub.write(f'{fn}.contsub.fits')
                 frqtxt = f'{frq.value:0.2f}'
