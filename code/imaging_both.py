@@ -1,71 +1,266 @@
+# sbatch --job-name=casa_22A-020_KuA --account=astronomy-dept --qos=astronomy-dept-b --nodes=1 --ntasks=16 --mem=256gb --time=96:00:00 --output=/blue/adamginsburg/adamginsburg/logs/VLA-22A-020_sgrb2_KuA_%j.log --wrap "/orange/adamginsburg/casa/casa-6.6.6-17-pipeline-2025.1.0.35-py3.10.el8/bin/casa --pipeline -c /orange/adamginsburg/sgrb2/22A-020/code/imaging_Kuband_Aarray.py"
+
+
+print(f"CASA log file: {casalog.logfile()}")
+
+# imaging Ku-band A-array (both EBs combined)
 import os
+os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Aarray')
 vis = ['../22A-020.sb41257746.eb41788351.59700.31502699074/22A-020.sb41257746.eb41788351.59700.31502699074.ms',
        '../22A-020.sb41257746.eb41789929.59703.295863067135/22A-020.sb41257746.eb41789929.59703.295863067135.ms']
 
+contspw = [8, 9, 10, 11, 12, 13, 14, 15, 31, 32, 33, 34, 35, 36, 37, 38]
 
-
+# Step 1: Preliminary imaging
+for robust in (0, 2):
+    if not os.path.exists(f'KubandAarray.center.robust{robust}.continuum.big-coarse.liteclean.psf.tt0'):
+        tclean(vis=vis,
+               imagename=f'KubandAarray.center.robust{robust}.continuum.big-coarse.liteclean',
+               niter=10000, spw=",".join(map(str, contspw)), field='sgr b2b', imsize=[2000],
+               cell=['0.05arcsec'], specmode='mfs', deconvolver='mtmfs', weighting='briggs',
+               nterms=2,
+               robust=robust, parallel=False,
+               mask='clean_mask.crtf')
 
 for spw in (range(42,0,-1)):
-    if not os.path.exists(f'allEBs.sgrb2n.spw{spw}.liteclean.psf'):
+    if not os.path.exists(f'KubandAarray.sgrb2n.spw{spw}.liteclean.psf'):
         tclean(vis=vis,
-               imagename=f'allEBs.sgrb2n.spw{spw}.liteclean',
+               imagename=f'KubandAarray.sgrb2n.spw{spw}.liteclean',
                phasecenter='ICRS 17h47m19.87 -28d22m18.5',
                niter=1000, spw=str(spw), field='sgr b2b', imsize=[1000],
                cell=['0.02arcsec'], specmode='cube', weighting='briggs',
-               robust=0.5, parallel=True)
-    if not os.path.exists(f'allEBs.sgrb2m.spw{spw}.liteclean.psf'):
+               robust=0.5, parallel=False)
+    if not os.path.exists(f'KubandAarray.sgrb2m.spw{spw}.liteclean.psf'):
         tclean(vis=vis,
-               imagename=f'allEBs.sgrb2m.spw{spw}.liteclean',
+               imagename=f'KubandAarray.sgrb2m.spw{spw}.liteclean',
                phasecenter='ICRS 17h47m20.16 -28d23m04.5',
                niter=1000, spw=str(spw), field='sgr b2b', imsize=[1000],
                cell=['0.02arcsec'], specmode='cube', weighting='briggs',
-               robust=0.5, parallel=True)
+               robust=0.5, parallel=False)
 
 
 for spw in (16, 30, 39):
-    if not os.path.exists(f'allEBs.center.spw{spw}.big-coarse.liteclean.psf'):
+    if not os.path.exists(f'KubandAarray.center.spw{spw}.big-coarse.liteclean.psf'):
         tclean(vis=vis,
-               imagename=f'allEBs.center.spw{spw}.big-coarse.liteclean',
+               imagename=f'KubandAarray.center.spw{spw}.big-coarse.liteclean',
                niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
-               robust=0.5, parallel=True)
+               robust=0.5, parallel=False)
 
 for spw in (30,31):
-    if not os.path.exists(f'allEBs.center.robust2.spw{spw}.big-coarse.liteclean.psf'):
+    if not os.path.exists(f'KubandAarray.center.robust2.spw{spw}.big-coarse.liteclean.psf'):
         tclean(vis=vis,
-               imagename=f'allEBs.center.robust2.spw{spw}.big-coarse.liteclean',
+               imagename=f'KubandAarray.center.robust2.spw{spw}.big-coarse.liteclean',
                niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
-               robust=2, parallel=True)
+               robust=2, parallel=False)
 
 
 for spw in (16, 30, 39):
-    if not os.path.exists(f'allEBs.center.spw{spw}.big-coarse.clean.psf'):
+    if not os.path.exists(f'KubandAarray.center.spw{spw}.big-coarse.clean.psf'):
         tclean(vis=vis,
-               imagename=f'allEBs.center.spw{spw}.big-coarse.clean',
+               imagename=f'KubandAarray.center.spw{spw}.big-coarse.clean',
                niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
-               robust=0.5, parallel=True)
+               robust=0.5, parallel=False)
 
 for spw in (30,31):
-    if not os.path.exists(f'allEBs.center.robust2.spw{spw}.big-coarse.clean.psf'):
+    if not os.path.exists(f'KubandAarray.center.robust2.spw{spw}.big-coarse.clean.psf'):
         tclean(vis=vis,
-               imagename=f'allEBs.center.robust2.spw{spw}.big-coarse.clean',
+               imagename=f'KubandAarray.center.robust2.spw{spw}.big-coarse.clean',
                niter=1000000, threshold='10mJy', spw=str(spw), field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
-               robust=2, parallel=True)
+               robust=2, parallel=False)
 
 for vv in vis:
     if not os.path.exists(vv.replace(".ms", "_spw30_NaCl.split")):
         split(vis=vv, outputvis=vv.replace(".ms", "_spw30_NaCl.split"),
               width=8, field='sgr b2b', spw='30')
 for spw in (30,):
-    if not os.path.exists(f'allEBs.center.robust2.downsample.spw{spw}.big-coarse.clean.psf'):
+    if not os.path.exists(f'KubandAarray.center.robust2.downsample.spw{spw}.big-coarse.clean.psf'):
         tclean(vis=[vv.replace(".ms", "_spw30_NaCl.split") for vv in vis],
-               imagename=f'allEBs.center.robust2.downsample.spw{spw}.big-coarse.clean',
+               imagename=f'KubandAarray.center.robust2.downsample.spw{spw}.big-coarse.clean',
                niter=2000000, threshold='10mJy', field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
-               robust=2, parallel=True)
+               robust=2, parallel=False)
+
+# Step 2: Split the data first to create working copy
+vis_split = []
+for vv in vis:
+    vs = vv.replace('.ms', '.split.ms')
+    vis_split.append(vs)
+    if not os.path.exists(vs):
+        split(vis=vv,
+              outputvis=vs,
+              field='sgr b2b',
+              datacolumn='corrected')
+
+# Step 3: Non-selfcal imaging of NaCl line spws BEFORE deep cleaning/selfcal
+# UV continuum subtraction for spw 30 (NaCl line)
+uvcontsub_vis_spw30_noselfcal = []
+for vs in vis_split:
+    uv = vs.replace('.ms', '.spw30.contsub')
+    uvcontsub_vis_spw30_noselfcal.append(uv)
+    if not os.path.exists(uv):
+        uvcontsub(vis=vs,
+                  outputvis=uv,
+                  spw='30',
+                  fitspec='30:50~460', # 512 channels
+                  fitorder=0)
+
+# Clean spw 30 WITH uvcontsub (non-selfcal only)
+for robust in (0, 2):
+    imagename = f'KubandAarray.center.spw30.robust{robust}.contsub.noselfcal.clean'
+    if not os.path.exists(f'{imagename}.psf'):
+        tclean(vis=uvcontsub_vis_spw30_noselfcal,
+               imagename=imagename,
+               niter=10000,
+               threshold='1mJy',
+               spw='0',
+               field='sgr b2b',
+               imsize=[2000],
+               cell=['0.1arcsec'],
+               specmode='cube',
+               weighting='briggs',
+               robust=robust,
+               parallel=False)
+
+# Clean spw 30 WITHOUT uvcontsub using lite continuum model as startmodel (non-selfcal only)
+for robust in (0, 2):
+    contmodel = f'KubandAarray.center.robust{robust}.continuum.big-coarse.liteclean.model.tt0',
+    imagename = f'KubandAarray.center.spw30.robust{robust}.withcont.noselfcal.clean'
+    if not os.path.exists(f'{imagename}.psf'):
+        tclean(vis=vis_split,
+               imagename=imagename,
+               niter=10000,
+               threshold='1mJy',
+               spw='30',
+               field='sgr b2b',
+               imsize=[2000],
+               cell=['0.1arcsec'],
+               specmode='cube',
+               weighting='briggs',
+               robust=robust,
+               parallel=False)
+
+# Step 4: Deep continuum clean for self-calibration on split data
+for robust in (0, 2):
+    imagename = f'KubandAarray.center.robust{robust}.continuum.deepclean'
+    if not os.path.exists(f'{imagename}.psf.tt0'):
+        tclean(vis=vis_split,
+               imagename=imagename,
+               niter=100000,
+               threshold='0.1mJy',
+               spw=",".join(map(str, contspw)),
+               field='sgr b2b',
+               imsize=[2000],
+               cell=['0.05arcsec'],
+               specmode='mfs',
+               weighting='briggs',
+               deconvolver='mtmfs',
+               nterms=2,
+               robust=robust,
+               parallel=False,
+               savemodel='modelcolumn',
+               mask='clean_mask.crtf')
+
+# Step 5: Self-calibration on continuum
+# Use the first split MS for gaincal (need to combine gain tables for multi-MS case)
+caltable = 'KubandAarray.center.pcal1'
+if not os.path.exists(caltable):
+    gaincal(vis=vis_split[0],
+            caltable=caltable,
+            field='sgr b2b',
+            solint='inf',
+            refant='ea10',
+            calmode='p',
+            gaintype='G',
+            combine='scan')
+
+# Apply phase calibration and split to create selfcal MS
+vis_selfcal = []
+for vv, vs in zip(vis, vis_split):
+    vsc = vv.replace('.ms', '.selfcal.ms')
+    vis_selfcal.append(vsc)
+    if not os.path.exists(vsc):
+        applycal(vis=vs,
+                 field='sgr b2b',
+                 gaintable=[caltable],
+                 interp='linear',
+                 applymode='calonly')
+        
+        split(vis=vs,
+              outputvis=vsc,
+              field='sgr b2b',
+              datacolumn='corrected')
+
+# Step 6: Selfcal imaging of NaCl line spws AFTER selfcal
+# UV continuum subtraction for spw 30 (selfcal data)
+uvcontsub_vis_spw30_selfcal = []
+for vsc in vis_selfcal:
+    uv = vsc.replace('.ms', '.spw30.contsub')
+    uvcontsub_vis_spw30_selfcal.append(uv)
+    if not os.path.exists(uv):
+        uvcontsub(vis=vsc,
+                  outputvis=uv,
+                  spw='30',
+                  fitspec='30:100~800',
+                  fitorder=0)
+
+# Clean spw 30 WITH uvcontsub (selfcal only)
+for robust in (0, 2):
+    imagename = f'KubandAarray.center.spw30.robust{robust}.contsub.selfcal.clean'
+    if not os.path.exists(f'{imagename}.psf'):
+        tclean(vis=uvcontsub_vis_spw30_selfcal,
+               imagename=imagename,
+               niter=10000,
+               threshold='1mJy',
+               spw='0',
+               field='sgr b2b',
+               imsize=[2000],
+               cell=['0.1arcsec'],
+               specmode='cube',
+               weighting='briggs',
+               robust=robust,
+               parallel=False)
+
+# Clean spw 30 WITHOUT uvcontsub using deep continuum model as startmodel (selfcal only)
+for robust in (0, 2):
+    contmodel = f'KubandAarray.center.robust{robust}.continuum.deepclean.model.tt0'
+    imagename = f'KubandAarray.center.spw30.robust{robust}.withcont.selfcal.clean'
+    if not os.path.exists(f'{imagename}.psf'):
+        tclean(vis=vis_selfcal,
+               imagename=imagename,
+               niter=10000,
+               threshold='1mJy',
+               spw='30',
+               field='sgr b2b',
+               imsize=[2000],
+               cell=['0.1arcsec'],
+               specmode='cube',
+               weighting='briggs',
+               robust=robust,
+               parallel=False)
+
+# Step 7: Reimage continuum with selfcal
+for robust in (0, 2):
+    imagename = f'KubandAarray.center.robust{robust}.continuum.deepclean.selfcal'
+    if not os.path.exists(f'{imagename}.psf.tt0'):
+        tclean(vis=vis_selfcal,
+               imagename=imagename,
+               niter=100000,
+               threshold='0.1mJy',
+               spw=",".join(map(str, contspw)),
+               field='sgr b2b',
+               imsize=[2000],
+               cell=['0.05arcsec'],
+               specmode='mfs',
+               weighting='briggs',
+               deconvolver='mtmfs',
+               nterms=2,
+               robust=robust,
+               parallel=False,
+               mask='clean_mask.crtf')
 
 
 
