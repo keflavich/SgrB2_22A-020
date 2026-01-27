@@ -74,7 +74,7 @@ for robust in (2, 0):
                 datacolumn='data', # important b/c we're going to populate 'corrected' below
                imagename=imagename,
                niter=100000,
-               threshold='0.1mJy',
+               threshold='3.0mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[2000],
@@ -279,7 +279,7 @@ for robust in (0, 2):
         tclean(vis=[vis_selfcal_contavg],
                imagename=imagename,
                niter=100000,
-               threshold='0.1mJy',
+               threshold='3.0mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[2000],
@@ -298,7 +298,7 @@ for robust in (0, 2):
                datacolumn='corrected',
                imagename=imagename,
                niter=100000,
-               threshold='0.1mJy',
+               threshold='3.0mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[2000],

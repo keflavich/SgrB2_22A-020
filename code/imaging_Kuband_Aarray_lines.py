@@ -80,7 +80,7 @@ for robust in (0, 2):
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=uvcontsub_vis_spw30_noselfcal,               datacolumn='data',               imagename=imagename,
                niter=10000,
-               threshold='1mJy',
+               threshold='1.5mJy',
                spw='30',  # uvcontsub preserves original spw numbering
                field='sgr b2b',
                imsize=[2000],
@@ -98,7 +98,7 @@ for robust in (0, 2):
         tclean(vis=vis_split,
                imagename=imagename,
                niter=10000,
-               threshold='1mJy',
+               threshold='1.5mJy',
                spw='30',
                field='sgr b2b',
                imsize=[2000],
@@ -167,7 +167,7 @@ for robust in (0, 2):
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=uvcontsub_vis_spw30_selfcal,               datacolumn='data',               imagename=imagename,
                niter=10000,
-               threshold='1mJy',
+               threshold='1.5mJy',
                spw='30',  # uvcontsub preserves original spw numbering
                field='sgr b2b',
                imsize=[2000],
@@ -185,7 +185,7 @@ for robust in (0, 2):
         tclean(vis=vis_selfcal,
                imagename=imagename,
                niter=10000,
-               threshold='1mJy',
+               threshold='1.5mJy',
                spw='30',
                field='sgr b2b',
                imsize=[2000],
