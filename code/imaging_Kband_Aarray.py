@@ -161,7 +161,7 @@ for key in stats:
         logprint(f'{key} has model with rms={stats[key]["rms"]}')
 if not has_any_model:
     raise RuntimeError("FATAL ERROR: Model column is empty! Cannot run gaincal - this would corrupt the data!")
-logprint("\u2713 Model column verified - proceeding with gaincal")
+logprint("Model column verified - proceeding with gaincal")
 if not os.path.exists(caltable):
     gaincal(vis=vis_contavg,
             caltable=caltable,
