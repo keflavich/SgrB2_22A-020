@@ -4,8 +4,8 @@ import os
 import shutil
 os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Darray')
 
-def logprint(string, origin='imaging_Kband_Darray.py', priority='INFO'):
-    print(string)
+def logprint(string, origin='imaging_Kband_Darray.py', priority='INFO', flush=True):
+    print(string, flush=flush)
     casalog.post(string, origin=origin, priority=priority)
 
 logprint(f"CASA log file: {casalog.logfile()}")

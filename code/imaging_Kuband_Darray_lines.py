@@ -5,14 +5,14 @@
 import os
 import shutil
 os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Darray')
-logprint(f"CASA log file: {casalog.logfile()}")
 vis = ['../22A-020_sb41854545_1_1.59783.16907671296/22A-020_sb41854545_1_1.59783.16907671296.ms']
 listobs(vis[0], listfile='Kuband_Darray.listobs', overwrite=True)
 
-def logprint(string, origin='imaging_Kuband_Darray.py', priority='INFO'):
-    print(string)
+def logprint(string, origin='imaging_Kuband_Darray.py', priority='INFO', flush=True):
+    print(string, flush=flush)
     casalog.post(string, origin=origin, priority=priority)
 
+logprint(f"CASA log file: {casalog.logfile()}")
 # 2           1 7.2147e-07     0.434501 13.026012279345801 0.6251501990154984                0.0   v=0-0 J=1-0     0     0     1     0    48    16
 # spw13: NaCl 1-0
 # KClv=0                       15.378087          2-1
