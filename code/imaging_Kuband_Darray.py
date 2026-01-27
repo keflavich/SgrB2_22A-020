@@ -74,6 +74,7 @@ for robust in (2, 0):
 
     if not os.path.exists(f'{imagename}.psf.tt0'):
         tclean(vis=[vis_contavg],
+                datacolumn='data', # important b/c we're going to populate 'corrected' below
                imagename=imagename,
                niter=10000,
                threshold='25mJy',
@@ -178,40 +179,54 @@ gaincal(vis=vis_contavg,
         combine='spw',
         calmode='p',
         gaintype='G')
+gaincal(vis=vis_contavg,
+        caltable='Kuband_Darray.center.pcal.nocombine',
+        field='sgr b2b',
+        solint='inf',
+        refant='ea10',
+        refantmode='flex',
+        minsnr=3.0,
+        #combine='spw',
+        calmode='p',
+        gaintype='G')
 
 # Diagnostic plots for gaincal solutions
 logprint("Creating diagnostic plots for calibration table...")
-plotms(vis=caltable,
-       xaxis='time',
-       yaxis='phase',
-       coloraxis='antenna1',
-       plotfile=f'{caltable}_phase_vs_time.png',
-       showgui=False,
-       overwrite=True,
-       plotrange=[-1,-1,-180,180])
-plotms(vis=caltable,
-       xaxis='time',
-       yaxis='amp',
-       coloraxis='antenna1',
-       plotfile=f'{caltable}_amp_vs_time.png',
-       showgui=False,
-       overwrite=True)
-plotms(vis=caltable,
-       xaxis='antenna1',
-       yaxis='phase',
-       coloraxis='corr',
-       plotfile=f'{caltable}_phase_vs_antenna.png',
-       showgui=False,
-       overwrite=True,
-       plotrange=[-1,-1,-180,180])
-plotms(vis=caltable,
-       xaxis='antenna1',
-       yaxis='snr',
-       coloraxis='corr',
-       plotfile=f'{caltable}_snr_vs_antenna.png',
-       showgui=False,
-       overwrite=True)
-logprint(f"Diagnostic plots saved: {caltable}_*.png")
+#listcal(caltable=caltable) < --- doesn't work?  says 'vis must exist' ?
+#plotcal(caltable=caltable, xaxis='time', yaxis='phase', figfile=f'{caltable}_phase_vs_time_plotcal.png', showgui=False)
+
+for caltable_to_plot in (caltable, 'Kuband_Darray.center.pcal.nocombine'):
+    plotms(vis=caltable_to_plot,
+           xaxis='time',
+           yaxis='phase',
+           coloraxis='antenna1',
+           plotfile=f'{caltable_to_plot}_phase_vs_time.png',
+           showgui=False,
+           overwrite=True,
+           plotrange=[-1,-1,-180,180])
+    plotms(vis=caltable_to_plot,
+           xaxis='time',
+           yaxis='amp',
+           coloraxis='antenna1',
+           plotfile=f'{caltable_to_plot}_amp_vs_time.png',
+           showgui=False,
+           overwrite=True)
+    plotms(vis=caltable_to_plot,
+           xaxis='antenna1',
+           yaxis='phase',
+           coloraxis='corr',
+           plotfile=f'{caltable_to_plot}_phase_vs_antenna.png',
+           showgui=False,
+           overwrite=True,
+           plotrange=[-1,-1,-180,180])
+    plotms(vis=caltable_to_plot,
+           xaxis='antenna1',
+           yaxis='snr',
+           coloraxis='corr',
+           plotfile=f'{caltable_to_plot}_snr_vs_antenna.png',
+           showgui=False,
+           overwrite=True)
+    logprint(f"Diagnostic plots saved: {caltable_to_plot}_*.png")
 
 # Apply phase calibration to the full split MS (with proper spwmap)
 # Create spwmap: all continuum spws map to spw 0 in the caltable
@@ -232,6 +247,12 @@ msmd.close()
 spwmap = [0] * nspws  # map all spws to solution 0
 
 applycal(vis=vis_split,
+         field='sgr b2b',
+         gaintable=[caltable],
+         interp='linear',
+         spwmap=[spwmap],
+         applymode='calonly')
+applycal(vis=vis_contavg,
          field='sgr b2b',
          gaintable=[caltable],
          interp='linear',
@@ -276,6 +297,25 @@ for robust in (0, 2):
                parallel=False,
                mask='clean_mask.crtf',
                savemodel='modelcolumn')
+    imagename = f'Kuband_Darray.center.robust{robust}.continuum.deepclean.selfcal.preaveraged'
+    if not os.path.exists(f'{imagename}.psf.tt0'):
+        tclean(vis=[vis_contavg],
+               datacolumn='corrected',
+               imagename=imagename,
+               niter=100000,
+               threshold='0.5mJy',
+               spw='',  # use all spws in the averaged MS
+               field='sgr b2b',
+               imsize=[600],
+               cell=['0.5arcsec'],
+               specmode='mfs',
+               weighting='briggs',
+               deconvolver='mtmfs',
+               nterms=2,
+               robust=robust,
+               parallel=False,
+               mask='clean_mask.crtf',
+               savemodel='none')
 
 # Convolve model with synthesized beam to create realistic model image
 for robust in (0, 2):
