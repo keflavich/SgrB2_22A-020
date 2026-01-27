@@ -53,7 +53,7 @@ if not os.path.exists(vis_contavg):
                 spw=",".join(map(str, contspw)),
                 datacolumn='data',
                 chanaverage=True,
-                chanbin=999999,  # average all channels in each spw
+                chanbin=12,  # average 12 channels in each spw - should have 10 left
                 combinespws=False)  # keep spws separate for now
 
 logprint("Step 3b: Deep continuum clean for self-calibration on channel-averaged data")
@@ -154,6 +154,7 @@ for robust in (0, 2):
 logprint("Step 4: Self-calibration on channel-averaged continuum")
 # Phase-only self-calibration (only need to do once, not per robust)
 caltable = 'Kuband_Darray.center.pcal1'
+caltable_nocombine = 'Kuband_Darray.center.pcal.nocombine'
 # CRITICAL: Verify model column is populated before running gaincal
 # If model is empty, gaincal will corrupt the data!
 stats = visstat(vis=vis_contavg, datacolumn='model', useflags=False)
@@ -180,7 +181,7 @@ gaincal(vis=vis_contavg,
         calmode='p',
         gaintype='G')
 gaincal(vis=vis_contavg,
-        caltable='Kuband_Darray.center.pcal.nocombine',
+        caltable=caltable_nocombine,
         field='sgr b2b',
         solint='inf',
         refant='ea10',
@@ -195,7 +196,7 @@ logprint("Creating diagnostic plots for calibration table...")
 #listcal(caltable=caltable) < --- doesn't work?  says 'vis must exist' ?
 #plotcal(caltable=caltable, xaxis='time', yaxis='phase', figfile=f'{caltable}_phase_vs_time_plotcal.png', showgui=False)
 
-for caltable_to_plot in (caltable, 'Kuband_Darray.center.pcal.nocombine'):
+for caltable_to_plot in (caltable, caltable_nocombine):
     plotms(vis=caltable_to_plot,
            xaxis='time',
            yaxis='phase',
@@ -285,7 +286,7 @@ for robust in (0, 2):
         tclean(vis=[vis_selfcal_contavg],
                imagename=imagename,
                niter=100000,
-               threshold='0.5mJy',
+               threshold='10mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[600],
@@ -304,7 +305,7 @@ for robust in (0, 2):
                datacolumn='corrected',
                imagename=imagename,
                niter=100000,
-               threshold='0.5mJy',
+               threshold='10mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[600],
