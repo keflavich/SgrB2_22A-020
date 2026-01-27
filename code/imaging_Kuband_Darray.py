@@ -252,11 +252,12 @@ applycal(vis=vis_split,
          interp='linear',
          spwmap=[spwmap],
          applymode='calonly')
+
+# no spwmap because it's the same file
 applycal(vis=vis_contavg,
          field='sgr b2b',
          gaintable=[caltable],
          interp='linear',
-         spwmap=[spwmap],
          applymode='calonly')
 
 split(vis=vis_split,
