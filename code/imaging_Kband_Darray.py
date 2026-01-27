@@ -45,7 +45,7 @@ if not os.path.exists(vis_split):
           field='sgr b2b',
           datacolumn='corrected')
 
-logprint("Step 4a: Split continuum spws separately and average all channels for better SNR")
+logprint("Step 3a: Split continuum spws separately and average all channels for better SNR")
 vis_contavg = vis_split.replace('.ms', '.contavg.ms')
 if not os.path.exists(vis_contavg):
     # Use mstransform to split continuum spws and average all channels
@@ -56,10 +56,10 @@ if not os.path.exists(vis_contavg):
                 spw=",".join(map(str, contspw)),
                 datacolumn='data',
                 chanaverage=True,
-                chanbin=999999,  # average all channels in each spw
+                chanbin=12,  # average 12 channels in each spw - should have 10 left
                 combinespws=False)  # keep spws separate for now
 
-logprint("Step 4b: Deep continuum clean for self-calibration on channel-averaged data")
+logprint("Step 3b: Deep continuum clean for self-calibration on channel-averaged data")
 
 startmodel = ''
 for robust in (2, 0):
@@ -77,6 +77,7 @@ for robust in (2, 0):
 
     if not os.path.exists(f'{imagename}.psf.tt0'):
         tclean(vis=[vis_contavg],
+                datacolumn='data', # important b/c we're going to populate 'corrected' below
                imagename=imagename,
                niter=100000,
                threshold='0.5mJy',
@@ -96,7 +97,7 @@ for robust in (2, 0):
         startmodel = f'{imagename}.model.tt0'
 
 
-stats = visstat(vis=vis_contavg, datacolumn='model')
+stats = visstat(vis=vis_contavg, datacolumn='model', useflags=False)
 has_model = False
 for key in stats:
     # RMS can be scalar or array depending on data shape
@@ -105,12 +106,12 @@ for key in stats:
         has_model_ = rms[0] > 0 or rms[1] > 0
     else:
         has_model_ = rms > 0
-    logprint(f'MS file {vis_contavg}[{key}] {"has model" if has_model_ else "model is zero"}  (rms={stats[key]["rms"]})')
+    logprint(f'MS file {vis_contavg}[{key}] {"has model" if has_model_ else "model is zero"}  (rms={stats[key]["rms"]})', flush=True)
     has_model = (has_model or has_model_)  # ANY spw with model is good enough
 
 if not has_model:
     # populate all model columns for all spws
-    logprint(f"Model column not properly populated, using ft to populate from {imagename}.model.tt0/tt1")
+    logprint(f"Model column not properly populated, using ft to populate from {imagename}.model.tt0/tt1", flush=True)
     delmod(vis_contavg)
     ft(
         vis=vis_contavg,
@@ -153,8 +154,10 @@ for robust in (0, 2):
                  outfile=model_conv,
                  overwrite=True)
 
-logprint("Step 5: Self-calibration on channel-averaged continuum")
+logprint("Step 4: Self-calibration on channel-averaged continuum")
+# Phase-only self-calibration (only need to do once, not per robust)
 caltable = 'Kband_Darray.center.pcal1'
+caltable_nocombine = 'Kband_Darray.center.pcal.nocombine'
 # CRITICAL: Verify model column is populated before running gaincal
 # If model is empty, gaincal will corrupt the data!
 stats = visstat(vis=vis_contavg, datacolumn='model', useflags=False)
@@ -164,10 +167,10 @@ for key in stats:
     has_rms = (rms[0] > 0 or rms[1] > 0) if hasattr(rms, '__len__') else (rms > 0)
     if has_rms:
         has_any_model = True
-        logprint(f'{key} has model with rms={stats[key]["rms"]}')
+        logprint(f'{key} has model with rms={stats[key]["rms"]}', flush=True)
 if not has_any_model:
     raise RuntimeError("FATAL ERROR: Model column is empty! Cannot run gaincal - this would corrupt the data!")
-logprint("Model column verified - proceeding with gaincal")
+logprint("Model column verified - proceeding with gaincal", flush=True)
 if os.path.exists(caltable):
     rmtables(caltable)
 gaincal(vis=vis_contavg,
@@ -180,40 +183,51 @@ gaincal(vis=vis_contavg,
         combine='spw',
         calmode='p',
         gaintype='G')
+gaincal(vis=vis_contavg,
+        caltable=caltable_nocombine,
+        field='sgr b2b',
+        solint='inf',
+        refant='ea10',
+        refantmode='flex',
+        minsnr=3.0,
+        #combine='spw',
+        calmode='p',
+        gaintype='G')
     
-    # Diagnostic plots for gaincal solutions
-    #logprint("Creating diagnostic plots for calibration table...")
-    #plotms(vis=caltable,
-    #       xaxis='time',
-    #       yaxis='phase',
-    #       coloraxis='antenna1',
-    #       plotfile=f'{caltable}_phase_vs_time.png',
-    #       showgui=False,
-    #       overwrite=True,
-    #       plotrange=[-1,-1,-180,180])
-    #plotms(vis=caltable,
-    #       xaxis='time',
-    #       yaxis='amp',
-    #       coloraxis='antenna1',
-    #       plotfile=f'{caltable}_amp_vs_time.png',
-    #       showgui=False,
-    #       overwrite=True)
-    #plotms(vis=caltable,
-    #       xaxis='antenna1',
-    #       yaxis='phase',
-    #       coloraxis='corr',
-    #       plotfile=f'{caltable}_phase_vs_antenna.png',
-    #       showgui=False,
-    #       overwrite=True,
-    #       plotrange=[-1,-1,-180,180])
-    #plotms(vis=caltable,
-    #       xaxis='antenna1',
-    #       yaxis='snr',
-    #       coloraxis='corr',
-    #       plotfile=f'{caltable}_snr_vs_antenna.png',
-    #       showgui=False,
-    #       overwrite=True)
-    #logprint(f"Diagnostic plots saved: {caltable}_*.png")
+# Diagnostic plots for gaincal solutions
+logprint("Creating diagnostic plots for calibration table...")
+for caltable_to_plot in (caltable, caltable_nocombine):
+    plotms(vis=caltable_to_plot,
+           xaxis='time',
+           yaxis='phase',
+           coloraxis='antenna1',
+           plotfile=f'{caltable_to_plot}_phase_vs_time.png',
+           showgui=False,
+           overwrite=True,
+           plotrange=[-1,-1,-180,180])
+    plotms(vis=caltable_to_plot,
+           xaxis='time',
+           yaxis='amp',
+           coloraxis='antenna1',
+           plotfile=f'{caltable_to_plot}_amp_vs_time.png',
+           showgui=False,
+           overwrite=True)
+    plotms(vis=caltable_to_plot,
+           xaxis='antenna1',
+           yaxis='phase',
+           coloraxis='corr',
+           plotfile=f'{caltable_to_plot}_phase_vs_antenna.png',
+           showgui=False,
+           overwrite=True,
+           plotrange=[-1,-1,-180,180])
+    plotms(vis=caltable_to_plot,
+           xaxis='antenna1',
+           yaxis='snr',
+           coloraxis='corr',
+           plotfile=f'{caltable_to_plot}_snr_vs_antenna.png',
+           showgui=False,
+           overwrite=True)
+    logprint(f"Diagnostic plots saved: {caltable_to_plot}_*.png")
 
 # Apply phase calibration to the full split MS (with proper spwmap)
 vis_selfcal = vis[0].replace('.ms', '.selfcal.ms')
@@ -222,6 +236,8 @@ if os.path.exists(vis_selfcal):
 
 # Map all spws to the combined solution
 # The caltable has solutions for the continuum spws only
+# We need to map each spw in vis_split to the appropriate solution
+# Since we used combine='spw', there's one solution for all
 # Determine number of SPWs from the MS
 from casatools import msmetadata
 msmd = msmetadata()
@@ -237,6 +253,13 @@ applycal(vis=vis_split,
          spwmap=[spwmap],
          applymode='calonly')
 
+# no spwmap because it's the same file
+applycal(vis=vis_contavg,
+         field='sgr b2b',
+         gaintable=[caltable],
+         interp='linear',
+         applymode='calonly')
+
 split(vis=vis_split,
       outputvis=vis_selfcal,
       field='sgr b2b',
@@ -244,20 +267,18 @@ split(vis=vis_split,
 
 logprint("Step 5: Create channel-averaged continuum MS from selfcal data")
 vis_selfcal_contavg = vis_selfcal.replace('.ms', '.contavg.ms')
-if os.path.exists(vis_selfcal_contavg):
-    shutil.rmtree(vis_selfcal_contavg)
+if not os.path.exists(vis_selfcal_contavg):
+    from casatasks import mstransform
+    mstransform(vis=vis_selfcal,
+                outputvis=vis_selfcal_contavg,
+                field='sgr b2b',
+                spw=",".join(map(str, contspw)),
+                datacolumn='data',
+                chanaverage=True,
+                chanbin=999999,  # average all channels in each spw
+                combinespws=False)
 
-from casatasks import mstransform
-mstransform(vis=vis_selfcal,
-            outputvis=vis_selfcal_contavg,
-            field='sgr b2b',
-            spw=",".join(map(str, contspw)),
-            datacolumn='data',
-            chanaverage=True,
-            chanbin=999999,  # average all channels in each spw
-            combinespws=False)
-
-logprint("Step 6: Reimage continuum with selfcal")
+logprint("Step 6: Reimage continuum with selfcal using deep clean parameters")
 for robust in (0, 2):
     imagename = f'Kband_Darray.center.robust{robust}.continuum.deepclean.selfcal'
     if not os.path.exists(f'{imagename}.psf.tt0'):
@@ -277,6 +298,25 @@ for robust in (0, 2):
                parallel=False,
                mask='clean_mask.crtf',
                savemodel='modelcolumn')
+    imagename = f'Kband_Darray.center.robust{robust}.continuum.deepclean.selfcal.preaveraged'
+    if not os.path.exists(f'{imagename}.psf.tt0'):
+        tclean(vis=[vis_contavg],
+               datacolumn='corrected',
+               imagename=imagename,
+               niter=100000,
+               threshold='0.5mJy',
+               spw='',  # use all spws in the averaged MS
+               field='sgr b2b',
+               imsize=[700],
+               cell=['0.25arcsec'],
+               specmode='mfs',
+               weighting='briggs',
+               deconvolver='mtmfs',
+               nterms=2,
+               robust=robust,
+               parallel=False,
+               mask='clean_mask.crtf',
+               savemodel='none')
 
 # Convolve model with synthesized beam to create realistic model image
 for robust in (0, 2):
@@ -295,4 +335,7 @@ for robust in (0, 2):
                  pa=str(bpa)+'deg',
                  outfile=model_conv,
                  overwrite=True)
+
+
+logprint("Imaging complete!")
 
