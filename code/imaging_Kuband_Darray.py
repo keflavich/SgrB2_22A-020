@@ -309,38 +309,38 @@ gaincal(vis=vis_contavg,
         gaintype='G')
 
 # Diagnostic plots for gaincal solutions
-logprint("Creating diagnostic plots for calibration table...")
-plotms(vis=caltable,
-       xaxis='time',
-       yaxis='phase',
-       coloraxis='antenna1',
-       plotfile=f'{caltable}_phase_vs_time.png',
-       showgui=False,
-       overwrite=True,
-       plotrange=[-1,-1,-180,180])
-plotms(vis=caltable,
-       xaxis='time',
-       yaxis='amp',
-       coloraxis='antenna1',
-       plotfile=f'{caltable}_amp_vs_time.png',
-       showgui=False,
-       overwrite=True)
-plotms(vis=caltable,
-       xaxis='antenna1',
-       yaxis='phase',
-       coloraxis='corr',
-       plotfile=f'{caltable}_phase_vs_antenna.png',
-       showgui=False,
-       overwrite=True,
-       plotrange=[-1,-1,-180,180])
-plotms(vis=caltable,
-       xaxis='antenna1',
-       yaxis='snr',
-       coloraxis='corr',
-       plotfile=f'{caltable}_snr_vs_antenna.png',
-       showgui=False,
-       overwrite=True)
-logprint(f"Diagnostic plots saved: {caltable}_*.png")
+# logprint("Creating diagnostic plots for calibration table...")
+# plotms(vis=caltable,
+#        xaxis='time',
+#        yaxis='phase',
+#        coloraxis='antenna1',
+#        plotfile=f'{caltable}_phase_vs_time.png',
+#        showgui=False,
+#        overwrite=True,
+#        plotrange=[-1,-1,-180,180])
+# plotms(vis=caltable,
+#        xaxis='time',
+#        yaxis='amp',
+#        coloraxis='antenna1',
+#        plotfile=f'{caltable}_amp_vs_time.png',
+#        showgui=False,
+#        overwrite=True)
+# plotms(vis=caltable,
+#        xaxis='antenna1',
+#        yaxis='phase',
+#        coloraxis='corr',
+#        plotfile=f'{caltable}_phase_vs_antenna.png',
+#        showgui=False,
+#        overwrite=True,
+#        plotrange=[-1,-1,-180,180])
+# plotms(vis=caltable,
+#        xaxis='antenna1',
+#        yaxis='snr',
+#        coloraxis='corr',
+#        plotfile=f'{caltable}_snr_vs_antenna.png',
+#        showgui=False,
+#        overwrite=True)
+# logprint(f"Diagnostic plots saved: {caltable}_*.png")
 
 # Apply phase calibration to the full split MS (with proper spwmap)
 # Create spwmap: all continuum spws map to spw 0 in the caltable
