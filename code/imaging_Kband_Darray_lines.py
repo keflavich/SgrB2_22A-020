@@ -26,9 +26,9 @@ contspw = [4,5,6,7,8,9,10,11, 27,28,29,30,31,32,33,34]
 
 for spw in (13,): # NaCl v=0
     for robust in (0, 2):
-        if not os.path.exists(f'Kband_Darray.center.robust{robust}.spw{spw}.big-coarse.liteclean.psf'):
+        if not os.path.exists(f'Kband_Darray.center.robust{robust}.spw{spw}.NaCl2-1.big-coarse.liteclean.psf'):
             tclean(vis=vis,
-                   imagename=f'Kband_Darray.center.robust{robust}.spw{spw}.big-coarse.liteclean',
+                   imagename=f'Kband_Darray.center.robust{robust}.spw{spw}.NaCl2-1.big-coarse.liteclean',
                    niter=1000, spw=str(spw), field='sgr b2b', imsize=[500],
                    cell=['0.5arcsec'], specmode='cube', weighting='briggs',
                    robust=robust, parallel=False)
@@ -58,7 +58,7 @@ if not os.path.exists(uvcontsub_vis_spw13_noselfcal):
 
 # Clean spw 13 WITH uvcontsub (non-selfcal only)
 for robust in (0, 2):
-    imagename = f'Kband_Darray.center.spw13.robust{robust}.contsub.noselfcal.clean'
+    imagename = f'Kband_Darray.center.spw13.NaCl2-1.robust{robust}.contsub.noselfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=uvcontsub_vis_spw13_noselfcal,
                datacolumn='data',
@@ -77,7 +77,7 @@ for robust in (0, 2):
 # Clean spw 13 WITHOUT uvcontsub using lite continuum model as startmodel (non-selfcal only)
 for robust in (0, 2):
     contmodel = f'Kband_Darray.center.robust{robust}.continuum.big-coarse.liteclean.model.tt0',
-    imagename = f'Kband_Darray.center.spw13.robust{robust}.withcont.noselfcal.clean'
+    imagename = f'Kband_Darray.center.spw13.NaCl2-1.robust{robust}.withcont.noselfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=[vis_split],
                imagename=imagename,
@@ -96,8 +96,8 @@ for robust in (0, 2):
 logprint("Cleaning up spw 13 cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
-        for prefix in [f'Kband_Darray.center.spw13.robust{robust}.contsub.noselfcal.clean',
-                       f'Kband_Darray.center.spw13.robust{robust}.withcont.noselfcal.clean']:
+        for prefix in [f'Kband_Darray.center.spw13.NaCl2-1.robust{robust}.contsub.noselfcal.clean',
+                       f'Kband_Darray.center.spw13.NaCl2-1.robust{robust}.withcont.noselfcal.clean']:
             fname = f'{prefix}.{suffix}'
             if os.path.exists(fname):
                 logprint(f"  Removing {fname}")
@@ -225,7 +225,7 @@ if os.path.exists(uvcontsub_vis_spw13_selfcal):
 uvcontsub(vis=vis_selfcal,
           outputvis=uvcontsub_vis_spw13_selfcal,
           spw='13',
-          fitspec='13:100~800',
+          fitspec='13:100~924',
               fitorder=0)
 
 # Clean spw 13 WITH uvcontsub (selfcal only)
@@ -271,7 +271,7 @@ if not os.path.exists(uvcontsub_vis_spw18_selfcal):
     uvcontsub(vis=vis_selfcal,
               outputvis=uvcontsub_vis_spw18_selfcal,
               spw='18',
-              fitspec='18:100~800',
+              fitspec='18:100~924',
               fitorder=0)
 
 # Clean spw 18 WITH uvcontsub (selfcal only)
@@ -319,7 +319,7 @@ if os.path.exists(uvcontsub_vis_spw26_selfcal):
 uvcontsub(vis=vis_selfcal,
           outputvis=uvcontsub_vis_spw26_selfcal,
           spw='26',
-          fitspec='26:100~800',
+          fitspec='26:100~924',
               fitorder=0)
 
 # Clean spw 26 WITH uvcontsub (selfcal only)
@@ -362,8 +362,8 @@ for robust in (0, 2):
 logprint("Cleaning up selfcal cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
-        for prefix in [f'Kband_Darray.center.spw13.robust{robust}.contsub.selfcal.clean',
-                       f'Kband_Darray.center.spw13.robust{robust}.withcont.selfcal.clean',
+        for prefix in [f'Kband_Darray.center.spw13.NaCl2-1.robust{robust}.contsub.selfcal.clean',
+                       f'Kband_Darray.center.spw13.NaCl2-1.robust{robust}.withcont.selfcal.clean',
                        f'Kband_Darray.center.spw18.NH3_7-7.robust{robust}.contsub.selfcal.clean',
                        f'Kband_Darray.center.spw18.NH3_7-7.robust{robust}.withcont.selfcal.clean',
                        f'Kband_Darray.center.spw26.KCl.robust{robust}.contsub.selfcal.clean',

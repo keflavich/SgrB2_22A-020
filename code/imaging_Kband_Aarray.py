@@ -15,6 +15,7 @@ logprint(f"CASA log file: {casalog.logfile()}")
 # NaCl v=1 2-1; 25.8582961GHz; Lsr Kinematic; Radio; 60.0km/s; 200.0km/s; 1.0km/s; DUAL; USE_RECIRCULATION=true
 
 vis = ['../22A-020_sb41852157_1_1.59747.288797835645/22A-020_sb41852157_1_1.59747.288797835645.ms']
+listobs(vis[0], listfile='Kband_Aarray.listobs', overwrite=True)
 
 contspw = [18,19,20,21,22,23,24,25,30,31,32,33,34,46,47,48]
 

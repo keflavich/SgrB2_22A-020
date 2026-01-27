@@ -12,26 +12,33 @@ def logprint(string, origin='imaging_Kuband_Aarray.py', priority='INFO', flush=T
 logprint(f"CASA log file: {casalog.logfile()}")
 vis = ['../22A-020.sb41257746.eb41788351.59700.31502699074/22A-020.sb41257746.eb41788351.59700.31502699074.ms',
        '../22A-020.sb41257746.eb41789929.59703.295863067135/22A-020.sb41257746.eb41789929.59703.295863067135.ms']
+for vv in vis:
+    eb = vv.split(".")[2]
+    listobs(vv, listfile=f'Kuband_Aarray.{eb}.listobs', overwrite=True)
 
 contspw = [8, 9, 10, 11, 12, 13, 14, 15, 31, 32, 33, 34, 35, 36, 37, 38]
 
+# spw 30 is the 512-channel NaCl 2-1 line
+# spw 31 is the broadband on the same frequency (~10 km/s channels)
+# spw 16 is H2CO
+# spw 39 is CH3OH
 
 for vv in vis:
     if not os.path.exists(vv.replace(".ms", "_spw30_NaCl.split")):
         split(vis=vv, outputvis=vv.replace(".ms", "_spw30_NaCl.split"),
               width=8, field='sgr b2b', spw='30')
 for spw in (30,):
-    if not os.path.exists(f'Kuband_Aarray.center.robust2.downsample.spw{spw}.big-coarse.clean.psf'):
+    if not os.path.exists(f'Kuband_Aarray.center.robust2.downsample.spw{spw}.NaCl1-0.big-coarse.clean.psf'):
         tclean(vis=[vv.replace(".ms", "_spw30_NaCl.split") for vv in vis],
-               imagename=f'Kuband_Aarray.center.robust2.downsample.spw{spw}.big-coarse.clean',
-               niter=2000000, threshold='10mJy', field='sgr b2b', imsize=[2000],
+               imagename=f'Kuband_Aarray.center.robust2.downsample.spw{spw}.NaCl1-0.big-coarse.clean',
+               niter=20000, threshold='10mJy', field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
                robust=2, parallel=False)
 
 for spw in (16, 30, 39):
-    if not os.path.exists(f'Kuband_Aarray.center.spw{spw}.big-coarse.liteclean.psf'):
+    if not os.path.exists(f'Kuband_Aarray.center.spw{spw}.NaCl1-0.big-coarse.liteclean.psf'):
         tclean(vis=vis,
-               imagename=f'Kuband_Aarray.center.spw{spw}.big-coarse.liteclean',
+               imagename=f'Kuband_Aarray.center.spw{spw}.NaCl1-0.big-coarse.liteclean',
                niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
                robust=0.5, parallel=False)
@@ -44,19 +51,11 @@ for spw in (30,31):
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
                robust=2, parallel=False)
 
-for spw in (16, 30, 39):
-    if not os.path.exists(f'Kuband_Aarray.center.spw{spw}.big-coarse.clean.psf'):
-        tclean(vis=vis,
-               imagename=f'Kuband_Aarray.center.spw{spw}.big-coarse.clean',
-               niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
-               cell=['0.1arcsec'], specmode='cube', weighting='briggs',
-               robust=0.5, parallel=False)
-
 for spw in (30,31):
     if not os.path.exists(f'Kuband_Aarray.center.robust2.spw{spw}.big-coarse.clean.psf'):
         tclean(vis=vis,
                imagename=f'Kuband_Aarray.center.robust2.spw{spw}.big-coarse.clean',
-               niter=1000000, threshold='10mJy', spw=str(spw), field='sgr b2b', imsize=[2000],
+               niter=10000, threshold='10mJy', spw=str(spw), field='sgr b2b', imsize=[2000],
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
                robust=2, parallel=False)
 
@@ -65,7 +64,7 @@ logprint("Step 3: Non-selfcal imaging of NaCl line spws BEFORE deep cleaning/sel
 # UV continuum subtraction for spw 30 (NaCl line)
 uvcontsub_vis_spw30_noselfcal = []
 for vs in vis_split:
-    uv = vs.replace('.ms', '.spw30.contsub')
+    uv = vs.replace('.ms', '.spw30.NaCl1-0.contsub')
     uvcontsub_vis_spw30_noselfcal.append(uv)
     if not os.path.exists(uv):
         uvcontsub(vis=vs,
@@ -76,7 +75,7 @@ for vs in vis_split:
 
 # Clean spw 30 WITH uvcontsub (non-selfcal only)
 for robust in (0, 2):
-    imagename = f'Kuband_Aarray.center.spw30.robust{robust}.contsub.noselfcal.clean'
+    imagename = f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.contsub.noselfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=uvcontsub_vis_spw30_noselfcal,               datacolumn='data',               imagename=imagename,
                niter=10000,
@@ -93,7 +92,7 @@ for robust in (0, 2):
 # Clean spw 30 WITHOUT uvcontsub using lite continuum model as startmodel (non-selfcal only)
 for robust in (0, 2):
     contmodel = f'Kuband_Aarray.center.robust{robust}.continuum.big-coarse.liteclean.model.tt0',
-    imagename = f'Kuband_Aarray.center.spw30.robust{robust}.withcont.noselfcal.clean'
+    imagename = f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.withcont.noselfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=vis_split,
                imagename=imagename,
@@ -158,7 +157,7 @@ for vsc in vis_selfcal:
     uvcontsub(vis=vsc,
               outputvis=uv,
               spw='30',
-              fitspec='30:100~800',
+              fitspec='30:50~462',
               fitorder=0)
 
 # Clean spw 30 WITH uvcontsub (selfcal only)
@@ -199,8 +198,8 @@ for robust in (0, 2):
 loglogprint("Cleaning up spw 30 cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
-        for prefix in [f'Kuband_Aarray.center.spw30.robust{robust}.contsub.selfcal.clean',
-                       f'Kuband_Aarray.center.spw30.robust{robust}.withcont.selfcal.clean']:
+        for prefix in [f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.contsub.selfcal.clean',
+                       f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.withcont.selfcal.clean']:
             fname = f'{prefix}.{suffix}'
             if os.path.exists(fname):
                 logprint(f"  Removing {fname}")
@@ -210,18 +209,21 @@ logprint("Imaging complete!")
 logprint("Cleaning up spw 30 selfcal cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
-        for prefix in [f'Kuband_Aarray.center.spw30.robust{robust}.contsub.selfcal.clean',
-                       f'Kuband_Aarray.center.spw30.robust{robust}.withcont.selfcal.clean']:
+        for prefix in [f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.contsub.selfcal.clean',
+                       f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.withcont.selfcal.clean']:
             fname = f'{prefix}.{suffix}'
             if os.path.exists(fname):
                 logprint(f"  Removing {fname}")
                 shutil.rmtree(fname)
 
-logprint("Imaging complete!")
-               deconvolver='mtmfs',
-               nterms=2,
-               robust=robust,
-               parallel=False,
-               mask='clean_mask.crtf',
-               savemodel='modelcolumn')
 
+for spw, mol in zip((16, 30, 39), ('H2CO', 'NaCl1-0', 'CH3OH')):
+    if not os.path.exists(f'Kuband_Aarray.center.spw{spw}.{mol}.big-coarse.clean.psf'):
+        tclean(vis=vis,
+               imagename=f'Kuband_Aarray.center.spw{spw}.{mol}.big-coarse.clean',
+               niter=1000, spw=str(spw), field='sgr b2b', imsize=[2000],
+               cell=['0.1arcsec'], specmode='cube', weighting='briggs',
+               robust=0.5, parallel=False)
+
+
+logprint("Imaging complete!")
