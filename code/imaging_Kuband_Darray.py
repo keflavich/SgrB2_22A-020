@@ -1,9 +1,10 @@
-# sbatch --job-name=casa_22A-020_KuD --account=astronomy-dept --qos=astronomy-dept-b --nodes=1 --ntasks=16 --mem=256gb --time=96:00:00 --output=/blue/adamginsburg/adamginsburg/logs/VLA-22A-020_sgrb2_KuD_%j.log --wrap "/orange/adamginsburg/casa/casa-6.6.6-17-pipeline-2025.1.0.35-py3.10.el8/bin/casa --pipeline -c /orange/adamginsburg/sgrb2/22A-020/code/imaging_Kuband_Darray.py"
+# sbatch --job-name=casa_22A-020_KuD --account=astronomy-dept --qos=astronomy-dept-b --nodes=1 --ntasks=16 --mem=256gb --time=96:00:00 --output=/blue/adamginsburg/adamginsburg/logs/VLA-22A-020_sgrb2_KuD_%j.log --wrap "xvfb-run -a /orange/adamginsburg/casa/casa-6.6.6-17-pipeline-2025.1.0.35-py3.10.el8/bin/casa --nologger --nogui --pipeline -c /orange/adamginsburg/sgrb2/22A-020/code/imaging_Kuband_Darray.py"
 
 
 # https://data.rc.ufl.edu/secure/adamginsburg/SgrB2/22A-020/22A-020_sb41854545_1_1.59783.16907671296/pipeline-20220725T214145/html/t2-1.html?sidebar=sidebar_22A_020_sb41854545_1_1_59783_16907671296_ms&subpage=listobs.txt
 import os
 import shutil
+from casatasks import mstransform
 os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Darray')
 vis = ['../22A-020_sb41854545_1_1.59783.16907671296/22A-020_sb41854545_1_1.59783.16907671296.ms']
 listobs(vis[0], listfile='Kuband_Darray.listobs', overwrite=True)
@@ -32,9 +33,6 @@ for robust in (0,2):
                mask='clean_mask.crtf')
 
 
-
-# UVcontsub spw 13 and then clean
-
 # clean continuum based on the cont spws, then selfcal, then apply to spw 13 and clean both with and without uvcontsub (without uvcontsub, it should use the cleaned cont as a startmodel)
 
 logprint("Step 1: Split the data first to create working copy")
@@ -49,7 +47,6 @@ logprint("Step 3a: Split continuum spws separately and average all channels for 
 vis_contavg = vis_split.replace('.ms', '.contavg.ms')
 if not os.path.exists(vis_contavg):
     # Use mstransform to split continuum spws and average all channels
-    from casatasks import mstransform
     mstransform(vis=vis_split,
                 outputvis=vis_contavg,
                 field='sgr b2b',
@@ -183,38 +180,38 @@ gaincal(vis=vis_contavg,
         gaintype='G')
 
 # Diagnostic plots for gaincal solutions
-# logprint("Creating diagnostic plots for calibration table...")
-# plotms(vis=caltable,
-#        xaxis='time',
-#        yaxis='phase',
-#        coloraxis='antenna1',
-#        plotfile=f'{caltable}_phase_vs_time.png',
-#        showgui=False,
-#        overwrite=True,
-#        plotrange=[-1,-1,-180,180])
-# plotms(vis=caltable,
-#        xaxis='time',
-#        yaxis='amp',
-#        coloraxis='antenna1',
-#        plotfile=f'{caltable}_amp_vs_time.png',
-#        showgui=False,
-#        overwrite=True)
-# plotms(vis=caltable,
-#        xaxis='antenna1',
-#        yaxis='phase',
-#        coloraxis='corr',
-#        plotfile=f'{caltable}_phase_vs_antenna.png',
-#        showgui=False,
-#        overwrite=True,
-#        plotrange=[-1,-1,-180,180])
-# plotms(vis=caltable,
-#        xaxis='antenna1',
-#        yaxis='snr',
-#        coloraxis='corr',
-#        plotfile=f'{caltable}_snr_vs_antenna.png',
-#        showgui=False,
-#        overwrite=True)
-# logprint(f"Diagnostic plots saved: {caltable}_*.png")
+logprint("Creating diagnostic plots for calibration table...")
+plotms(vis=caltable,
+       xaxis='time',
+       yaxis='phase',
+       coloraxis='antenna1',
+       plotfile=f'{caltable}_phase_vs_time.png',
+       showgui=False,
+       overwrite=True,
+       plotrange=[-1,-1,-180,180])
+plotms(vis=caltable,
+       xaxis='time',
+       yaxis='amp',
+       coloraxis='antenna1',
+       plotfile=f'{caltable}_amp_vs_time.png',
+       showgui=False,
+       overwrite=True)
+plotms(vis=caltable,
+       xaxis='antenna1',
+       yaxis='phase',
+       coloraxis='corr',
+       plotfile=f'{caltable}_phase_vs_antenna.png',
+       showgui=False,
+       overwrite=True,
+       plotrange=[-1,-1,-180,180])
+plotms(vis=caltable,
+       xaxis='antenna1',
+       yaxis='snr',
+       coloraxis='corr',
+       plotfile=f'{caltable}_snr_vs_antenna.png',
+       showgui=False,
+       overwrite=True)
+logprint(f"Diagnostic plots saved: {caltable}_*.png")
 
 # Apply phase calibration to the full split MS (with proper spwmap)
 # Create spwmap: all continuum spws map to spw 0 in the caltable
@@ -298,11 +295,5 @@ for robust in (0, 2):
                  outfile=model_conv,
                  overwrite=True)
 
-logprint("Step 7: Selfcal imaging of spw 13 AFTER selfcal")
-# UV continuum subtraction for spw 13 (selfcal data)
-logprint(f"Creating uvcontsub for selfcal data: vis_selfcal={vis_selfcal}")
-uvcontsub_vis_selfcal = vis_selfcal.replace('.ms', '.spw13.contsub')
-if os.path.exists(uvcontsub_vis_selfcal):
-    shutil.rmtree(uvcontsub_vis_selfcal)
 
 logprint("Imaging complete!")

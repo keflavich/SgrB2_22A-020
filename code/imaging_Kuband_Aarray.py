@@ -176,7 +176,7 @@ for vca in vis_contavg:
             logprint(f'{vca}[{key}] has model with rms={stats[key]["rms"]}')
 if not has_any_model:
     raise RuntimeError("FATAL ERROR: Model column is empty in all MS files! Cannot run gaincal - this would corrupt the data!")
-logprint("Model column verified - proceeding with gaincal"
+logprint("Model column verified - proceeding with gaincal")
 if not os.path.exists(caltable):
     gaincal(vis=vis_contavg,
             caltable=caltable,

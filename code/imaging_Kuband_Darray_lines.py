@@ -146,6 +146,13 @@ spws = msmd.spwsforfield('sgr b2b')
 logprint(f"Available spws in {vis_selfcal}: {spws}")
 msmd.close()
 
+logprint("Step 7: Selfcal imaging of spw 13 AFTER selfcal")
+# UV continuum subtraction for spw 13 (selfcal data)
+logprint(f"Creating uvcontsub for selfcal data: vis_selfcal={vis_selfcal}")
+uvcontsub_vis_selfcal = vis_selfcal.replace('.ms', '.spw13.contsub')
+if os.path.exists(uvcontsub_vis_selfcal):
+    shutil.rmtree(uvcontsub_vis_selfcal)
+
 uvcontsub(vis=vis_selfcal,
             outputvis=uvcontsub_vis_selfcal,
             spw='13',
