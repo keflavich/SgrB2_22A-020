@@ -8,6 +8,8 @@ os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Darray')
 vis = ['../22A-020_sb41854545_1_1.59783.16907671296/22A-020_sb41854545_1_1.59783.16907671296.ms']
 listobs(vis[0], listfile='Kuband_Darray.listobs', overwrite=True)
 
+vis_split = vis[0].replace('.ms', '.split.ms')
+
 def logprint(string, origin='imaging_Kuband_Darray.py', priority='INFO', flush=True):
     print(string, flush=flush)
     casalog.post(string, origin=origin, priority=priority)

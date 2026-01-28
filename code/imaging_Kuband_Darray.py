@@ -247,19 +247,24 @@ nspws = msmd.nspw()
 msmd.close()
 spwmap = [0] * nspws  # map all spws to solution 0
 
+# this version fails and I don't know why.
 applycal(vis=vis_split,
          field='sgr b2b',
          gaintable=[caltable],
          interp='linear',
          spwmap=[spwmap],
-         applymode='calonly')
+         applymode='calonly',
+         calwt=False
+         )
 
 # no spwmap because it's the same file
 applycal(vis=vis_contavg,
          field='sgr b2b',
          gaintable=[caltable],
          interp='linear',
-         applymode='calonly')
+         applymode='calonly',
+         calwt=False
+         )
 
 split(vis=vis_split,
         outputvis=vis_selfcal,
@@ -318,6 +323,121 @@ for robust in (0, 2):
                parallel=False,
                mask='clean_mask.crtf',
                savemodel='none')
+
+logprint("Step 7: Second round of phase-only self-calibration with 30s solution interval")
+# Use the model from the selfcal imaging to do shorter timescale calibration
+caltable2 = 'Kuband_Darray.center.pcal2_30s'
+if os.path.exists(caltable2):
+    rmtables(caltable2)
+gaincal(vis=vis_selfcal_contavg,
+        caltable=caltable2,
+        field='sgr b2b',
+        solint='30s',
+        refant='ea10',
+        refantmode='flex',
+        minsnr=2.0,
+        combine='spw',
+        calmode='p',
+        gaintype='G')
+
+# Diagnostic plots for second round gaincal solutions
+logprint("Creating diagnostic plots for second calibration table...")
+plotms(vis=caltable2,
+       xaxis='time',
+       yaxis='phase',
+       coloraxis='antenna1',
+       plotfile=f'{caltable2}_phase_vs_time.png',
+       showgui=False,
+       overwrite=True,
+       plotrange=[-1,-1,-180,180])
+plotms(vis=caltable2,
+       xaxis='time',
+       yaxis='amp',
+       coloraxis='antenna1',
+       plotfile=f'{caltable2}_amp_vs_time.png',
+       showgui=False,
+       overwrite=True)
+plotms(vis=caltable2,
+       xaxis='antenna1',
+       yaxis='phase',
+       coloraxis='corr',
+       plotfile=f'{caltable2}_phase_vs_antenna.png',
+       showgui=False,
+       overwrite=True,
+       plotrange=[-1,-1,-180,180])
+plotms(vis=caltable2,
+       xaxis='antenna1',
+       yaxis='snr',
+       coloraxis='corr',
+       plotfile=f'{caltable2}_snr_vs_antenna.png',
+       showgui=False,
+       overwrite=True)
+logprint(f"Diagnostic plots saved: {caltable2}_*.png")
+
+# Apply second calibration
+applycal(vis=vis_selfcal_contavg,
+         field='sgr b2b',
+         gaintable=[caltable2],
+         interp='linear',
+         applymode='calonly',
+         calwt=False)
+
+# Create second selfcal MS
+vis_selfcal2 = vis[0].replace('.ms', '.selfcal2.ms')
+if os.path.exists(vis_selfcal2):
+    shutil.rmtree(vis_selfcal2)
+
+# Apply second calibration to full resolution data
+msmd.open(vis_selfcal)
+nspws_selfcal = msmd.nspw()
+msmd.close()
+spwmap2 = [0] * nspws_selfcal
+
+applycal(vis=vis_selfcal,
+         field='sgr b2b',
+         gaintable=[caltable2],
+         interp='linear',
+         spwmap=[spwmap2],
+         applymode='calonly',
+         calwt=False)
+
+split(vis=vis_selfcal,
+      outputvis=vis_selfcal2,
+      field='sgr b2b',
+      datacolumn='corrected')
+
+logprint("Step 8: Create channel-averaged continuum MS from second selfcal")
+vis_selfcal2_contavg = vis_selfcal2.replace('.ms', '.contavg.ms')
+if not os.path.exists(vis_selfcal2_contavg):
+    mstransform(vis=vis_selfcal2,
+                outputvis=vis_selfcal2_contavg,
+                field='sgr b2b',
+                spw=",".join(map(str, contspw)),
+                datacolumn='data',
+                chanaverage=True,
+                chanbin=999999,
+                combinespws=False)
+
+logprint("Step 9: Final imaging with second selfcal")
+for robust in (0, 2):
+    imagename = f'Kuband_Darray.center.robust{robust}.continuum.deepclean.selfcal2'
+    if not os.path.exists(f'{imagename}.psf.tt0'):
+        tclean(vis=[vis_selfcal2_contavg],
+               imagename=imagename,
+               niter=100000,
+               threshold='5mJy',
+               spw='',
+               field='sgr b2b',
+               imsize=[600],
+               cell=['0.5arcsec'],
+               specmode='mfs',
+               weighting='briggs',
+               deconvolver='mtmfs',
+               nterms=2,
+               robust=robust,
+               parallel=False,
+               mask='clean_mask.crtf',
+               savemodel='modelcolumn')
 
 # Convolve model with synthesized beam to create realistic model image
 for robust in (0, 2):

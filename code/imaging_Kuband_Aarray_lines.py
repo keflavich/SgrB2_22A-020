@@ -16,6 +16,8 @@ for vv in vis:
     eb = vv.split(".")[2]
     listobs(vv, listfile=f'Kuband_Aarray.{eb}.listobs', overwrite=True)
 
+vis_split = [vv.replace('.ms', '.split.ms') for vv in vis]
+
 contspw = [8, 9, 10, 11, 12, 13, 14, 15, 31, 32, 33, 34, 35, 36, 37, 38]
 
 # spw 30 is the 512-channel NaCl 2-1 line
