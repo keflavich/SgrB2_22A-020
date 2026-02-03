@@ -16,7 +16,9 @@ for vv in vis:
     eb = vv.split(".")[2]
     listobs(vv, listfile=f'Kuband_Aarray.{eb}.listobs', overwrite=True)
 
-vis_split = [vv.replace('.ms', '.split.ms') for vv in vis]
+# Use basenames for split and selfcal MS files to keep them in current directory
+vis_split = [os.path.basename(vv).replace('.ms', '.split.ms') for vv in vis]
+vis_selfcal = [os.path.basename(vv).replace('.ms', '.selfcal.ms') for vv in vis]
 
 contspw = [8, 9, 10, 11, 12, 13, 14, 15, 31, 32, 33, 34, 35, 36, 37, 38]
 
@@ -37,7 +39,7 @@ for spw in (30,):
                cell=['0.1arcsec'], specmode='cube', weighting='briggs',
                robust=2, parallel=False)
 
-for spw in (16, 30, 39):
+for spw in (30, 39):
     if not os.path.exists(f'Kuband_Aarray.center.spw{spw}.NaCl1-0.big-coarse.liteclean.psf'):
         tclean(vis=vis,
                imagename=f'Kuband_Aarray.center.spw{spw}.NaCl1-0.big-coarse.liteclean',
@@ -197,7 +199,7 @@ for robust in (0, 2):
                parallel=False)
 
 # Cleanup: Remove .pb, .mask, .psf files for spw 30 selfcal cube images to save space
-loglogprint("Cleaning up spw 30 cube auxiliary files...")
+logprint("Cleaning up spw 30 cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
         for prefix in [f'Kuband_Aarray.center.spw30.NaCl1-0.robust{robust}.contsub.selfcal.clean',

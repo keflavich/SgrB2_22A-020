@@ -9,6 +9,7 @@ vis = ['../22A-020_sb41854545_1_1.59783.16907671296/22A-020_sb41854545_1_1.59783
 listobs(vis[0], listfile='Kuband_Darray.listobs', overwrite=True)
 
 vis_split = vis[0].replace('.ms', '.split.ms')
+vis_selfcal = vis[0].replace('.ms', '.selfcal.ms')
 
 def logprint(string, origin='imaging_Kuband_Darray.py', priority='INFO', flush=True):
     print(string, flush=flush)
@@ -36,7 +37,18 @@ if not os.path.exists(uvcontsub_vis_noselfcal):
 # Clean spw 13 WITH uvcontsub (non-selfcal only)
 for robust in (0, 2):
     imagename = f'Kuband_Darray.sgrb2.spw13.robust{robust}.contsub.noselfcal.clean'
-    if not os.path.exists(f'{imagename}.psf'):
+    
+    # If .image exists, imaging is complete - skip
+    if not os.path.exists(f'{imagename}.image'):
+        # Check for incomplete/locked files and remove them
+        for suffix in ['image', 'residual', 'psf', 'pb', 'mask', 'model', 'sumwt', 'weight']:
+            fname = f'{imagename}.{suffix}'
+            if os.path.exists(fname):
+                lock_file = f'{fname}/table.lock'
+                if os.path.exists(lock_file):
+                    logprint(f"Removing locked file {fname}")
+                    shutil.rmtree(fname)
+        
         tclean(vis=uvcontsub_vis_noselfcal,
                datacolumn='data',
                imagename=imagename,
@@ -57,7 +69,18 @@ for robust in (0, 2):
     contmodel = f'Kuband_Darray.center.robust{robust}.continuum.big-coarse.liteclean.model.tt0',
 
     imagename = f'Kuband_Darray.sgrb2.spw13.robust{robust}.withcont.noselfcal.clean'
-    if not os.path.exists(f'{imagename}.psf'):
+    
+    # If .image exists, imaging is complete - skip
+    if not os.path.exists(f'{imagename}.image'):
+        # Check for incomplete/locked files and remove them
+        for suffix in ['image', 'residual', 'psf', 'pb', 'mask', 'model', 'sumwt', 'weight']:
+            fname = f'{imagename}.{suffix}'
+            if os.path.exists(fname):
+                lock_file = f'{fname}/table.lock'
+                if os.path.exists(lock_file):
+                    logprint(f"Removing locked file {fname}")
+                    shutil.rmtree(fname)
+        
         tclean(vis=[vis_split],
                imagename=imagename,
                niter=10000,
@@ -85,56 +108,121 @@ for robust in (0, 2):
                 logprint(f"  Removing {fname}")
                 shutil.rmtree(fname)
 
-logprint("Step 2b: H2CO 14.488 GHz imaging (spw 14)\nUV continuum subtraction for spw 14 (H2CO, non-selfcal data only)")
-uvcontsub_vis_spw14_noselfcal = vis_split.replace('.ms', '.spw14.contsub')
-if not os.path.exists(uvcontsub_vis_spw14_noselfcal):
-    uvcontsub(vis=vis_split,
-              outputvis=uvcontsub_vis_spw14_noselfcal,
-              spw='14',
-              fitspec='14:100~900',  # avoid line channels
-              fitorder=0)
+# logprint("Step 2b: H2CO 14.488 GHz imaging (spw 14)\nUV continuum subtraction for spw 14 (H2CO, non-selfcal data only)")
+# uvcontsub_vis_spw14_noselfcal = vis_split.replace('.ms', '.spw14.contsub')
+# if not os.path.exists(uvcontsub_vis_spw14_noselfcal):
+#     uvcontsub(vis=vis_split,
+#               outputvis=uvcontsub_vis_spw14_noselfcal,
+#               spw='14',
+#               fitspec='14:100~900',  # avoid line channels
+#               fitorder=0)
 
 # Clean spw 14 WITH uvcontsub (non-selfcal only)
+#for robust in (0, 2):
+#    imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.noselfcal.clean'
+#    if not os.path.exists(f'{imagename}.psf'):
+#        tclean(vis=uvcontsub_vis_spw14_noselfcal,
+#               datacolumn='data',
+#               imagename=imagename,
+#               niter=10000,
+#               threshold='25mJy',
+#               spw='14',  # uvcontsub preserves original spw numbering
+#               field='sgr b2b',
+#               imsize=[600],
+#               cell=['0.5arcsec'],
+#               specmode='cube',
+#               weighting='briggs',
+#               robust=robust,
+#               parallel=False)
+
+# Clean spw 14 WITHOUT uvcontsub using lite continuum model as startmodel (non-selfcal only)
+# for robust in (0, 2):
+#     imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.noselfcal.clean'
+#     if not os.path.exists(f'{imagename}.psf'):
+#         tclean(vis=[vis_split],
+#                imagename=imagename,
+#                niter=10000,
+#                threshold='25mJy',
+#                spw='14',
+#                field='sgr b2b',
+#                imsize=[600],
+#                cell=['0.5arcsec'],
+#                specmode='cube',
+#                weighting='briggs',
+#                robust=robust,
+#                parallel=False)
+# 
+# # Cleanup: Remove .pb, .mask, .psf files for spw 14 cube images to save space
+# logprint("Cleaning up spw 14 cube auxiliary files...")
+# for robust in (0, 2):
+#     for suffix in ['pb', 'mask', 'psf']:
+#         for prefix in [f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.noselfcal.clean',
+#                        f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.noselfcal.clean']:
+#             fname = f'{prefix}.{suffix}'
+#             if os.path.exists(fname):
+#                 logprint(f"  Removing {fname}")
+#                 shutil.rmtree(fname)
+
+logprint("Step 2c: NaCl 13.026 GHz imaging with 2 km/s resolution (spw 13)")
+# UV continuum subtraction for spw 13 NaCl (non-selfcal data only) - same as Step 2 but reused
+uvcontsub_vis_noselfcal_nacl = vis_split.replace('.ms', '.spw13.contsub')
+if not os.path.exists(uvcontsub_vis_noselfcal_nacl):
+    uvcontsub(vis=vis_split,
+              outputvis=uvcontsub_vis_noselfcal_nacl,
+              spw='13',
+              fitspec='13:250~750',
+              fitorder=0)
+
+# Clean spw 13 NaCl WITH uvcontsub at 2 km/s resolution (non-selfcal only)
 for robust in (0, 2):
-    imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.noselfcal.clean'
+    imagename = f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.contsub.noselfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
-        tclean(vis=uvcontsub_vis_spw14_noselfcal,
+        # Use width parameter to set 2 km/s channel width
+        tclean(vis=uvcontsub_vis_noselfcal_nacl,
                datacolumn='data',
                imagename=imagename,
                niter=10000,
                threshold='25mJy',
-               spw='14',  # uvcontsub preserves original spw numbering
+               spw='13',
                field='sgr b2b',
                imsize=[600],
                cell=['0.5arcsec'],
                specmode='cube',
+               start='',  # start from beginning
+               width='2km/s',  # 2 km/s channel width
+               outframe='LSRK',
+               restfreq='13.026012279GHz',  # NaCl v=0-0 J=1-0
                weighting='briggs',
                robust=robust,
                parallel=False)
 
-# Clean spw 14 WITHOUT uvcontsub using lite continuum model as startmodel (non-selfcal only)
+# Clean spw 13 NaCl WITHOUT uvcontsub at 2 km/s resolution (non-selfcal only)
 for robust in (0, 2):
-    imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.noselfcal.clean'
+    imagename = f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.withcont.noselfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=[vis_split],
                imagename=imagename,
                niter=10000,
                threshold='25mJy',
-               spw='14',
+               spw='13',
                field='sgr b2b',
                imsize=[600],
                cell=['0.5arcsec'],
                specmode='cube',
+               start='',
+               width='2km/s',
+               outframe='LSRK',
+               restfreq='13.026012279GHz',
                weighting='briggs',
                robust=robust,
                parallel=False)
 
-# Cleanup: Remove .pb, .mask, .psf files for spw 14 cube images to save space
-logprint("Cleaning up spw 14 cube auxiliary files...")
+# Cleanup: Remove .pb, .mask, .psf files for spw 13 NaCl cube images to save space
+logprint("Cleaning up spw 13 NaCl 2 km/s cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
-        for prefix in [f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.noselfcal.clean',
-                       f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.noselfcal.clean']:
+        for prefix in [f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.contsub.noselfcal.clean',
+                       f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.withcont.noselfcal.clean']:
             fname = f'{prefix}.{suffix}'
             if os.path.exists(fname):
                 logprint(f"  Removing {fname}")
@@ -213,58 +301,118 @@ for robust in (0, 2):
                 logprint(f"  Removing {fname}")
                 shutil.rmtree(fname)
 
-logprint("Step 7b: H2CO 14.488 GHz selfcal imaging (spw 14)")
-# UV continuum subtraction for spw 14 (selfcal data)
-uvcontsub_vis_spw14_selfcal = vis_selfcal.replace('.ms', '.spw14.contsub')
-if not os.path.exists(uvcontsub_vis_spw14_selfcal):
-    uvcontsub(vis=vis_selfcal,
-              outputvis=uvcontsub_vis_spw14_selfcal,
-              spw='14',
-              fitspec='14:100~900',
-              fitorder=0)
+# logprint("Step 7b: H2CO 14.488 GHz selfcal imaging (spw 14)")
+# # UV continuum subtraction for spw 14 (selfcal data)
+# uvcontsub_vis_spw14_selfcal = vis_selfcal.replace('.ms', '.spw14.contsub')
+# if not os.path.exists(uvcontsub_vis_spw14_selfcal):
+#     uvcontsub(vis=vis_selfcal,
+#               outputvis=uvcontsub_vis_spw14_selfcal,
+#               spw='14',
+#               fitspec='14:100~900',
+#               fitorder=0)
+# 
+# logprint("Clean spw 14 WITH uvcontsub (selfcal only)")
+# for robust in (0, 2):
+#     imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.selfcal.clean'
+#     if not os.path.exists(f'{imagename}.psf'):
+#         tclean(vis=uvcontsub_vis_spw14_selfcal,
+#                datacolumn='data',
+#                imagename=imagename,
+#                niter=10000,
+#                threshold='25mJy',
+#                spw='14',  # uvcontsub preserves original spw numbering
+#                field='sgr b2b',
+#                imsize=[600],
+#                cell=['0.5arcsec'],
+#                specmode='cube',
+#                weighting='briggs',
+#                robust=robust,
+#                parallel=False)
+# 
+# # Clean spw 14 WITHOUT uvcontsub using deep continuum model as startmodel (selfcal only)
+# for robust in (0, 2):
+#     contmodel = f'Kuband_Darray.center.robust{robust}.continuum.deepclean.model.tt0'
+#     imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.selfcal.clean'
+#     if not os.path.exists(f'{imagename}.psf'):
+#         tclean(vis=[vis_selfcal],
+#                imagename=imagename,
+#                niter=10000,
+#                threshold='25mJy',
+#                spw='14',
+#                field='sgr b2b',
+#                imsize=[600],
+#                cell=['0.5arcsec'],
+#                specmode='cube',
+#                weighting='briggs',
+#                robust=robust,
+#                parallel=False)
+# 
+# # Cleanup: Remove .pb, .mask, .psf files for spw 14 selfcal cube images to save space
+# logprint("Cleaning up spw 14 selfcal cube auxiliary files...")
+# for robust in (0, 2):
+#     for suffix in ['pb', 'mask', 'psf']:
+#         for prefix in [f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.selfcal.clean',
+#                        f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.selfcal.clean']:
+#             fname = f'{prefix}.{suffix}'
+#             if os.path.exists(fname):
+#                 logprint(f"  Removing {fname}")
+#                 shutil.rmtree(fname)
 
-logprint("Clean spw 14 WITH uvcontsub (selfcal only)")
+logprint("Step 7c: NaCl 13.026 GHz selfcal imaging with 2 km/s resolution (spw 13)")
+# UV continuum subtraction for spw 13 NaCl (selfcal data) - same as Step 7
+uvcontsub_vis_selfcal_nacl = vis_selfcal.replace('.ms', '.spw13.contsub')
+# Already created in Step 7, reuse it
+
+# Clean spw 13 NaCl WITH uvcontsub at 2 km/s resolution (selfcal only)
 for robust in (0, 2):
-    imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.selfcal.clean'
+    imagename = f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.contsub.selfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
-        tclean(vis=uvcontsub_vis_spw14_selfcal,
+        logprint(f"Cleaning NaCl 2 km/s {imagename} from {uvcontsub_vis_selfcal_nacl}")
+        tclean(vis=uvcontsub_vis_selfcal_nacl,
                datacolumn='data',
                imagename=imagename,
                niter=10000,
                threshold='25mJy',
-               spw='14',  # uvcontsub preserves original spw numbering
+               spw='13',
                field='sgr b2b',
                imsize=[600],
                cell=['0.5arcsec'],
                specmode='cube',
+               start='',
+               width='2km/s',  # 2 km/s channel width
+               outframe='LSRK',
+               restfreq='13.026012279GHz',  # NaCl v=0-0 J=1-0
                weighting='briggs',
                robust=robust,
                parallel=False)
 
-# Clean spw 14 WITHOUT uvcontsub using deep continuum model as startmodel (selfcal only)
+# Clean spw 13 NaCl WITHOUT uvcontsub at 2 km/s resolution (selfcal only)
 for robust in (0, 2):
-    contmodel = f'Kuband_Darray.center.robust{robust}.continuum.deepclean.model.tt0'
-    imagename = f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.selfcal.clean'
+    imagename = f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.withcont.selfcal.clean'
     if not os.path.exists(f'{imagename}.psf'):
         tclean(vis=[vis_selfcal],
                imagename=imagename,
                niter=10000,
                threshold='25mJy',
-               spw='14',
+               spw='13',
                field='sgr b2b',
                imsize=[600],
                cell=['0.5arcsec'],
                specmode='cube',
+               start='',
+               width='2km/s',
+               outframe='LSRK',
+               restfreq='13.026012279GHz',
                weighting='briggs',
                robust=robust,
                parallel=False)
 
-# Cleanup: Remove .pb, .mask, .psf files for spw 14 selfcal cube images to save space
-logprint("Cleaning up spw 14 selfcal cube auxiliary files...")
+# Cleanup: Remove .pb, .mask, .psf files for spw 13 NaCl selfcal cube images to save space
+logprint("Cleaning up spw 13 NaCl 2 km/s selfcal cube auxiliary files...")
 for robust in (0, 2):
     for suffix in ['pb', 'mask', 'psf']:
-        for prefix in [f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.contsub.selfcal.clean',
-                       f'Kuband_Darray.sgrb2.spw14.H2CO.robust{robust}.withcont.selfcal.clean']:
+        for prefix in [f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.contsub.selfcal.clean',
+                       f'Kuband_Darray.sgrb2.spw13.NaCl.2kms.robust{robust}.withcont.selfcal.clean']:
             fname = f'{prefix}.{suffix}'
             if os.path.exists(fname):
                 logprint(f"  Removing {fname}")

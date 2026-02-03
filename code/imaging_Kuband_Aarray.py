@@ -3,15 +3,17 @@
 # imaging Ku-band A-array (both EBs combined)
 import os
 import shutil
-os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Aarray')
 
 def logprint(string, origin='imaging_Kuband_Aarray.py', priority='INFO', flush=True):
     print(string, flush=flush)
     casalog.post(string, origin=origin, priority=priority)
 
 logprint(f"CASA log file: {casalog.logfile()}")
-vis = ['../22A-020.sb41257746.eb41788351.59700.31502699074/22A-020.sb41257746.eb41788351.59700.31502699074.ms',
-       '../22A-020.sb41257746.eb41789929.59703.295863067135/22A-020.sb41257746.eb41789929.59703.295863067135.ms']
+
+vis = ['/orange/adamginsburg/sgrb2/22A-020/22A-020.sb41257746.eb41788351.59700.31502699074/22A-020.sb41257746.eb41788351.59700.31502699074.ms',
+       '/orange/adamginsburg/sgrb2/22A-020/22A-020.sb41257746.eb41789929.59703.295863067135/22A-020.sb41257746.eb41789929.59703.295863067135.ms']
+
+os.chdir('/orange/adamginsburg/sgrb2/22A-020/imaging_Aarray')
 
 contspw = [8, 9, 10, 11, 12, 13, 14, 15, 31, 32, 33, 34, 35, 36, 37, 38]
 
@@ -27,28 +29,38 @@ for robust in (0, 2):
                mask='clean_mask.crtf')
 
 
-
-
-
-
 logprint("Step 2: Split the data first to create working copy")
 vis_split = []
 for vv in vis:
-    vs = vv.replace('.ms', '.split.ms')
-    vis_split.append(vs)
-    if not os.path.exists(vs):
+    # Extract just the MS name and keep it in current directory
+    basename = os.path.basename(vv)
+    vs = basename.replace('.ms', '.split.ms')
+    # Use absolute path to avoid CASA path validation issues
+    vs_abs = os.path.abspath(vs)
+    vis_split.append(vs_abs)
+    if not os.path.exists(vs_abs):
+        logprint(f"Creating split MS: {vs_abs}")
         split(vis=vv,
-              outputvis=vs,
+              outputvis=vs_abs,
               field='sgr b2b',
               datacolumn='corrected')
+        if not os.path.exists(vs_abs):
+            raise RuntimeError(f"Failed to create {vs_abs}")
+    else:
+        logprint(f"Split MS already exists: {vs_abs}")
 
+logprint(f"Split MS files: {vis_split}")
 
 logprint("Step 3a: Split continuum spws separately and average all channels for better SNR")
 vis_contavg = []
 for vs in vis_split:
     vca = vs.replace('.ms', '.contavg.ms')
+    # vca is already absolute from vis_split
     vis_contavg.append(vca)
     if not os.path.exists(vca):
+        logprint(f"Creating continuum-averaged MS: {vca} from {vs}")
+        if not os.path.exists(vs):
+            raise RuntimeError(f"Source MS {vs} does not exist! Cannot create {vca}")
         # Use mstransform to split continuum spws and average all channels
         from casatasks import mstransform
         mstransform(vis=vs,
@@ -59,12 +71,25 @@ for vs in vis_split:
                     chanaverage=True,
                     chanbin=12,  # average 12 channels in each spw - should have 10 left
                     combinespws=False)  # keep spws separate for now
+        if not os.path.exists(vca):
+            raise RuntimeError(f"Failed to create {vca}")
+    else:
+        logprint(f"Continuum-averaged MS already exists: {vca}")
+
+logprint(f"Continuum-averaged MS files: {vis_contavg}")
+for vca in vis_contavg:
+    if not os.path.exists(vca):
+        raise RuntimeError(f"FATAL: Continuum-averaged MS {vca} does not exist!")
+    else:
+        logprint(f"Verified existence of {vca}")
 
 logprint("Step 3b: Deep continuum clean for self-calibration on channel-averaged data")
 
 startmodel = ''
 for robust in (2, 0):
     imagename = f'Kuband_Aarray.center.robust{robust}.continuum.deepclean'
+    needs_reimaging = False
+    
     if os.path.exists(f'{imagename}.model.tt0'):
         imhist = imhistory(f'{imagename}.model.tt0')
         # Check if any of the vis_contavg MS files are in the history
@@ -74,16 +99,27 @@ for robust in (2, 0):
             if vis_entries:
                 logprint(f"Model was created with: {vis_entries[0]}")
             logprint(f"Removing {imagename} files and reimaging")
-            for suffix in ('alpha', 'alpha.error', 'image.tt0', 'image.tt1', 'mask', 'model.tt0', 'model.tt1', 'pb.tt0', 'psf.tt0', 'psf.tt1', 'psf.tt2', 'residual.tt0', 'residual.tt1', 'sumwt.tt0','sumwt.tt1', 'sumwt.tt2'):
-                if os.path.exists(f'{imagename}.{suffix}'):
-                    shutil.rmtree(f'{imagename}.{suffix}')
+            needs_reimaging = True
+    
+    # Check for table locks or corrupted files
+    if os.path.exists(f'{imagename}.psf.tt0'):
+        lock_file = f'{imagename}.psf.tt0/table.lock'
+        if os.path.exists(lock_file):
+            logprint(f"Found lock file {lock_file}, removing all {imagename} files")
+            needs_reimaging = True
+    
+    if needs_reimaging:
+        for suffix in ('alpha', 'alpha.error', 'image.tt0', 'image.tt1', 'mask', 'model.tt0', 'model.tt1', 'pb.tt0', 'psf.tt0', 'psf.tt1', 'psf.tt2', 'residual.tt0', 'residual.tt1', 'sumwt.tt0','sumwt.tt1', 'sumwt.tt2'):
+            if os.path.exists(f'{imagename}.{suffix}'):
+                logprint(f"Removing {imagename}.{suffix}")
+                shutil.rmtree(f'{imagename}.{suffix}')
 
     if not os.path.exists(f'{imagename}.psf.tt0'):
         tclean(vis=vis_contavg,
                 datacolumn='data', # important b/c we're going to populate 'corrected' below
                imagename=imagename,
-               niter=100000,
-               threshold='0.1mJy',
+               niter=20000,
+               threshold='2mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[2000],
@@ -162,9 +198,7 @@ for robust in (0, 2):
                  overwrite=True)
 
 logprint("Step 4: Self-calibration on channel-averaged continuum")
-# Phase-only self-calibration (combine both EBs for better SNR)
-caltable = 'Kuband_Aarray.center.pcal1'
-caltable_nocombine = 'Kuband_Aarray.center.pcal.nocombine'
+# Phase-only self-calibration - create separate caltable for each MS
 # CRITICAL: Verify model column is populated before running gaincal
 # If model is empty, gaincal will corrupt the data!
 has_any_model = False
@@ -179,32 +213,31 @@ for vca in vis_contavg:
 if not has_any_model:
     raise RuntimeError("FATAL ERROR: Model column is empty in all MS files! Cannot run gaincal - this would corrupt the data!")
 logprint("Model column verified - proceeding with gaincal", flush=True)
-if os.path.exists(caltable):
-    rmtables(caltable)
-gaincal(vis=vis_contavg,
-        caltable=caltable,
-        field='sgr b2b',
-        solint='inf',
-        refant='ea10',
-        refantmode='flex',
-        minsnr=3.0,
-        combine='spw,scan',  # combine across spws and scans for multiple EBs
-        calmode='p',
-        gaintype='G')
-gaincal(vis=vis_contavg,
-        caltable=caltable_nocombine,
-        field='sgr b2b',
-        solint='inf',
-        refant='ea10',
-        refantmode='flex',
-        minsnr=3.0,
-        #combine='spw',
-        calmode='p',
-        gaintype='G')
+
+# Create separate caltable for each MS file
+caltables = []
+for vca in vis_contavg:
+    # Extract EB identifier from MS name
+    basename = os.path.basename(vca).replace('.split.contavg.ms', '')
+    caltable = f'{basename}.pcal1'
+    caltables.append(caltable)
+    if os.path.exists(caltable):
+        rmtables(caltable)
+    logprint(f"Running gaincal on {vca} -> {caltable}")
+    gaincal(vis=vca,
+            caltable=caltable,
+            field='sgr b2b',
+            solint='inf',
+            refant='ea10',
+            refantmode='flex',
+            minsnr=3.0,
+            combine='spw,scan',  # combine across spws and scans
+            calmode='p',
+            gaintype='G')
 
 # Diagnostic plots for gaincal solutions
-logprint("Creating diagnostic plots for calibration table...")
-for caltable_to_plot in (caltable, caltable_nocombine):
+logprint("Creating diagnostic plots for calibration tables...")
+for caltable_to_plot in caltables:
     plotms(vis=caltable_to_plot,
            xaxis='time',
            yaxis='phase',
@@ -239,11 +272,16 @@ for caltable_to_plot in (caltable, caltable_nocombine):
 
 # Apply phase calibration to the full split MS (with proper spwmap)
 vis_selfcal = []
-for vv, vs in zip(vis, vis_split):
-    vsc = vv.replace('.ms', '.selfcal.ms')
+for i, (vv, vs) in enumerate(zip(vis, vis_split)):
+    # Use basename to keep selfcal MS in current directory
+    basename = os.path.basename(vv)
+    vsc = basename.replace('.ms', '.selfcal.ms')
     vis_selfcal.append(vsc)
     if os.path.exists(vsc):
         shutil.rmtree(vsc)
+    
+    # Use the corresponding caltable for this MS
+    caltable_for_this_ms = caltables[i]
     
     # Map all spws to the combined solution
     # The caltable has solutions for the continuum spws only
@@ -257,9 +295,10 @@ for vv, vs in zip(vis, vis_split):
     msmd.close()
     spwmap = [0] * nspws  # map all spws to solution 0
     
+    logprint(f"Applying {caltable_for_this_ms} to {vs}")
     applycal(vis=vs,
              field='sgr b2b',
-             gaintable=[caltable],
+             gaintable=[caltable_for_this_ms],
              interp='linear',
              spwmap=[spwmap],
              applymode='calonly')
@@ -269,11 +308,13 @@ for vv, vs in zip(vis, vis_split):
           field='sgr b2b',
           datacolumn='corrected')
 
-# no spwmap because it's the same file
-for vca in vis_contavg:
+# Apply to continuum-averaged MS as well
+for i, vca in enumerate(vis_contavg):
+    caltable_for_this_ms = caltables[i]
+    logprint(f"Applying {caltable_for_this_ms} to {vca}")
     applycal(vis=vca,
              field='sgr b2b',
-             gaintable=[caltable],
+             gaintable=[caltable_for_this_ms],
              interp='linear',
              applymode='calonly')
 
@@ -301,8 +342,8 @@ for robust in (0, 2):
     if not os.path.exists(f'{imagename}.psf.tt0'):
         tclean(vis=vis_selfcal_contavg,
                imagename=imagename,
-               niter=100000,
-               threshold='0.1mJy',
+               niter=20000,
+               threshold='2mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[2000],
@@ -320,8 +361,8 @@ for robust in (0, 2):
         tclean(vis=vis_contavg,
                datacolumn='corrected',
                imagename=imagename,
-               niter=100000,
-               threshold='0.1mJy',
+               niter=20000,
+               threshold='2mJy',
                spw='',  # use all spws in the averaged MS
                field='sgr b2b',
                imsize=[2000],

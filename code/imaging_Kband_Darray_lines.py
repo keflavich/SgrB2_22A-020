@@ -21,6 +21,7 @@ vis = ['../22A-020_sb41854998_1_1.59785.110016307866/22A-020_sb41854998_1_1.5978
 listobs(vis[0], listfile='Kband_Darray.listobs', overwrite=True)
 
 vis_split = vis[0].replace('.ms', '.split.ms')
+vis_selfcal = vis[0].replace('.ms', '.selfcal.ms')
 
 contspw = [4,5,6,7,8,9,10,11, 27,28,29,30,31,32,33,34]
 # 4-11, 27-34
