@@ -1,0 +1,12 @@
+# ASTRID source catalog for GBT-26B-012 (Salt in Sgr B2N)
+# Coordinates J2000; velocities LSR-kinematic radio, km/s.
+#
+# Map center is SgrB2N.  The 6'x6' OTF map centered here encompasses
+# SgrB2N, SgrB2M, and G0.693-0.027 (all within ~1.5' of center).
+format=spherical
+coordmode=J2000
+veldef=vrad-lsr
+HEAD = NAME        RA           DEC          VEL
+SgrB2N             17:47:19.87  -28:22:18.4  64.0
+SgrB2M             17:47:20.16  -28:23:04.5  64.0
+G0.693             17:47:21.86  -28:21:27.3  68.0
