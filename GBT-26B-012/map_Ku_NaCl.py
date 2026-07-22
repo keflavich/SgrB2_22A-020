@@ -1,23 +1,21 @@
 """
-GBT-26B-012 -- Ku-band (13 GHz) NaCl J=1-0 OTF map of Sgr B2(N).
+GBT-26B-012 -- Ku-band (13 GHz) NaCl v=0 J=1-0 OTF map of Sgr B2(N).
 
-6' x 6' on-the-fly map centered on SgrB2N, run as an RA/Dec basketweave.
-Config: VEGAS Mode 4, single 187.5 MHz window on NaCl v=0 1-0, both beams.
+Geometry reproduces the GBT Mapping Calculator result for a 6'x6' map at
+13.026 GHz (scaled from the 12' run in ../../.. OTFplanning.txt):
+    FWHM 56.7" | Nyquist 23.75" | slew 7.42"/s
+    row separation 24"  ->  16 rows
+    scanDuration 48.5 s/row  ->  ~12.9 min on-source per (single-direction) map
+    ~19 s of integration per beam per map   [matches the proposal]
 
-Proposal budget (GBT-26B-012): 10-sigma on the ~30 mK peak => ~3 mK rms
-per beam (native ~0.13 km/s, smoothed to ~1 km/s), ~2500 s per pointing.
-Total on-source ~29 h; ~36 h with overhead, split into 12 x 3 h sessions.
-Regenerate the exact scanDuration / row count with the GBT Mapping
-Calculator (the proposal's OTF calc gave ~19 s/beam per ~13-min map,
-131 repeats); the geometry below is a well-sampled starting point.
+Proposal budget (GBT-26B-012): 10-sigma on the ~30 mK peak => ~3 mK/beam
+=> ~2500 s/beam => 131 map repeats => ~28 h on-source, ~36 h with overhead,
+split into 12 x 3 h sessions (~11 maps per session).
 
-Sequence per scheduling block:
-    1. Run pointing_Ku.py first (pointing + focus + Configure).
-    2. Run this script (one or more basketweave passes).
-    3. Re-run pointing_Ku.py every ~45-60 min.
-
-Mapping strategy follows the GBT pipeline / Langston recommendations used
-in our earlier GC Ku maps: no per-scan reference, basketweave in RA & Dec.
+Each "map" is one single-direction OTF pass; we alternate RA-scanned and
+Dec-scanned passes to basketweave (suppresses scan-direction striping)
+across the 131 repeats.  Config: VEGAS Mode 4, single 187.5 MHz window on
+NaCl v=0 1-0, both Ku beams, in-band frequency switching.
 """
 
 # ---- EDIT to the project's script directory on the GBT system ----
@@ -26,33 +24,39 @@ PROJPATH = "/users/aginsbur/GBT-26B-012"
 Catalog(PROJPATH + "/sgrb2_salt.cat")
 Configure(PROJPATH + "/config_Ku_NaCl.py")
 
-Slew("SgrB2N")
-Balance()
+# ---- calculator-matched geometry ----
+deg      = 1.0
+arcsec   = 1/3600.
+mapsize  = 6/60.          # 0.1 deg square (encompasses N, M, G0.693)
+rowsep   = 24.0*arcsec    # ~Nyquist at 57" beam -> 16 rows over 6'
+scanDur  = 48.5           # s per row (6' / 7.42"/s)
 
-# ---- map geometry ----
-amintodeg  = 1/60.
-mapsize    = 6.0      # arcmin, square map (encompasses N, M, G0.693)
-rowsep     = 15.0/60. # arcmin  (15" ~ FWHM/3.8 at 57" beam; < Nyquist 24")
-scanrate   = 8.0      # arcmin/min  -> 12.8"/sample at tint=1.6 (< FWHM/4)
-scanDur    = mapsize/scanrate * 60.   # 45 s per row
+# ---- session / pointing control ----
+maps_this_session = 11    # ~11 x 12.9 min + pointing ~= 3 h.  131 total.
+point_every       = 3     # re-point every 3 maps (~40 min) -- Sgr B2 is low.
 
-nrep = 1   # number of RA+Dec basketweave passes in THIS block; increase to
-           # fill the scheduled time (~48 min per pass).
+for i in range(maps_this_session):
 
-for i in range(nrep):
+    if i % point_every == 0:
+        # Peak + focus near the science frequency, then restore config.
+        AutoPeakFocus(frequency=13026.0, beamName="1")
+        Configure(PROJPATH + "/config_Ku_NaCl.py")
+        Slew("SgrB2N")
+        Balance()
 
-    # Rows scanned in RA, stepped in Dec:
-    RALongMap("SgrB2N",
-        hLength = Offset("J2000", mapsize*amintodeg, 0.0, cosv=True),
-        vLength = Offset("J2000", 0.0, mapsize*amintodeg, cosv=True),
-        vDelta  = Offset("J2000", 0.0, rowsep, cosv=True),
-        scanDuration = scanDur,
-        beamName = "1")
-
-    # Rows scanned in Dec, stepped in RA (basketweave, suppresses stripes):
-    DecLatMap("SgrB2N",
-        hLength = Offset("J2000", mapsize*amintodeg, 0.0, cosv=True),
-        vLength = Offset("J2000", 0.0, mapsize*amintodeg, cosv=True),
-        hDelta  = Offset("J2000", rowsep, 0.0, cosv=True),
-        scanDuration = scanDur,
-        beamName = "1")
+    if i % 2 == 0:
+        # RA-scanned rows, stepped in Dec:
+        RALongMap("SgrB2N",
+            hLength = Offset("J2000", mapsize, 0.0, cosv=True),
+            vLength = Offset("J2000", 0.0, mapsize, cosv=True),
+            vDelta  = Offset("J2000", 0.0, rowsep, cosv=True),
+            scanDuration = scanDur,
+            beamName = "1")
+    else:
+        # Dec-scanned rows, stepped in RA (basketweave):
+        DecLatMap("SgrB2N",
+            hLength = Offset("J2000", mapsize, 0.0, cosv=True),
+            vLength = Offset("J2000", 0.0, mapsize, cosv=True),
+            hDelta  = Offset("J2000", rowsep, 0.0, cosv=True),
+            scanDuration = scanDur,
+            beamName = "1")

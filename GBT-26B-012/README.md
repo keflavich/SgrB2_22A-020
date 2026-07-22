@@ -20,10 +20,18 @@ Ku- and K-band on-the-fly (OTF), to localize the extended NaCl emission
 
 ## Per-session sequence
 
-1. `pointing_<band>.py` — point/focus on a nearby calibrator, then re-Configure.
-2. `map_<band>_NaCl.py` — run one or more RA/Dec basketweave passes (set `nrep`).
-3. Re-run pointing every ~45–60 min (Ku) / ~30–45 min (K). Sgr B2 transits at
-   low elevation from Green Bank; K-band prefers night / good weather.
+Each `map_<band>_NaCl.py` **self-manages pointing**: it runs
+`AutoPeakFocus` at the start and every `point_every` maps, re-Configures,
+`Balance`s, then loops single-direction OTF maps (alternating RA/Dec to
+basketweave). So a 3-h session is just:
+
+1. `map_<band>_NaCl.py` — set `maps_this_session` to fill ~3 h.
+   (`pointing_<band>.py` remains available for a standalone point/focus check.)
+2. Repeat across sessions until the campaign total is reached:
+   **131 maps (Ku)** and **116 maps (K)** — track the cumulative count.
+
+Sgr B2 transits at low elevation from Green Bank; the in-loop pointing
+cadence (`point_every`) is a **floor**, especially at K-band.
 
 > **Before submitting:** edit `PROJPATH` at the top of each script to the
 > project's directory on the GBT filesystem (placeholder: `/users/aginsbur/GBT-26B-012`).
@@ -48,19 +56,23 @@ resolution is far finer than needed; smooth to ~1 km/s in reduction.
 1‑0 values are consistent to ~1 km/s with the VLA project catalog
 (`../instrument_configurations/KuLineCatalog.txt`).
 
-## Map / sensitivity budget (from the submitted proposal)
+## Map / sensitivity budget (matched to the submitted proposal)
 
-- Beam FWHM ≈ 57″ (Ku), ≈ 29″ (K). Row spacing 15″ (Ku) / 10″ (K); scan
-  rate 8′/min (Ku) / 4′/min (K) keeps <¼-beam smear at `tint=1.6 s`.
-- **Ku:** 10σ on the ~30 mK peak → ~3 mK rms → ~2500 s/pointing.
-  ~29 h on-source, **~36 h** with overhead → **12 × 3 h** sessions.
-- **K:** 10σ on the ~15 mK peak → ~3 mK rms → ~6000 s/pointing single-beam,
-  ~2200 s with the √7 KFPA gain. ~41 h on-source, **~51 h** with overhead
-  → **17 × 3 h** sessions. (Total request **87 h**.)
-- The proposal's OTF calculator gave ~19 s/beam per ~12–13 min map, 131
-  (Ku) / 116 (K) repeats. Regenerate the exact `scanDuration`/row counts
-  with the **GBT Mapping Calculator** for the final geometry; the values
-  in the map scripts are a well-sampled starting point.
+One "map" = one single-direction 6′ OTF pass giving ~**19 s/beam**;
+alternate RA/Dec across repeats to basketweave.
+
+- **Ku** — geometry reproduces the GBT Mapping Calculator exactly: FWHM 57″,
+  row sep **24″** (Nyquist), **16 rows**, **48.5 s/row** → **12.9 min/map**.
+  10σ on the ~30 mK peak → ~3 mK/beam → ~2500 s/beam → **131 maps** →
+  ~28 h on-source, **~36 h** with overhead → **12 × 3 h** sessions.
+- **K (KFPA)** — 10σ on the ~15 mK peak → ~3 mK/beam → ~6000 s/beam
+  single-beam, **~2200 s with the √7 KFPA gain** → **116 maps** → ~41 h
+  on-source, **~51 h** with overhead → **17 × 3 h** sessions.
+  The script uses 12″ (single-beam Nyquist) rows as a *safe fallback*
+  (~50 min/map). **Run the KFPA branch of the mapping calculator** to set
+  the wider array row spacing (~36″ → ~18 min/map) that delivers the √7
+  gain the budget assumes — see the header note in `map_K_NaCl.py`.
+- **Total request: 87 h.**
 
 ## Observing notes / to confirm before submission
 
