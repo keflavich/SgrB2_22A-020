@@ -1,49 +1,42 @@
 # =====================================================================
 # GBT-26B-012  --  Salt in Sgr B2(N)
-# Ku-band (13 GHz) VEGAS configuration:  NaCl J=1-0 ladder (EMISSION)
+# Ku-band (13 GHz) VEGAS configuration:  NaCl v=0 J=1-0  (EMISSION)
 # =====================================================================
-# Science goal: map the extended NaCl v=0 J=1-0 emission (13.026 GHz)
-# that PRIMOS detected but the VLA resolved out.  We use VEGAS with
-# multiple 187.5-MHz sub-bands, one per vibrational state, at ~0.13 km/s
-# native resolution (smooth to ~0.5-1 km/s in reduction).  187.5 MHz is
-# the widest VEGAS mode giving < 1 km/s resolution and gives ~4300 km/s
-# of coverage per window -- far more than the ~200 km/s Sgr B2 needs.
+# Matches the submitted proposal resource table (GBT-26B-012.pdf, p.2):
+#   VEGAS Mode 4, 187.5 MHz bandwidth, ~32768 channels -> 5.7 kHz
+#   (0.13 km/s at 13 GHz), a SINGLE spectral window on NaCl v=0 1-0,
+#   both Ku beams, in-band frequency switching.
 #
-# Switching: in-band frequency switching (swmode='sp', with cal), which
-# is what the extended-emission science requires (no clean OFF within
-# the field).  4 phases per integration: tint = 4 * swper (1.6 = 4*0.4).
-#
-# Frequencies (MHz, LSR rest): NaCl 1-0 ladder.  v=0..4 span 12642-13026
-# MHz, so each needs its own 187.5-MHz window (5 sub-bands, <= 8 allowed).
-#   NaCl v=0  window also contains H79alpha (13088.85) at its high edge.
-#   NaCl v=4  window (center 12642.56) also contains Na37Cl v=1 (12653.7).
-# Rest freqs from the proposal line list; consistent to ~1 km/s with the
-# VLA project catalog (instrument_configurations/KuLineCatalog.txt).
+# 187.5 MHz gives ~4300 km/s of coverage -- far more than the ~200 km/s
+# Sgr B2 line-of-sight needs -- so one window covers the science line
+# with room to spare.  We do NOT put separate windows on the excited
+# vibrational states (they fall outside this window and were descoped in
+# the submitted setup; they also sit in Ku DBS RFI).  Native resolution
+# is far finer than needed; smooth to ~1 km/s in reduction.
 # =====================================================================
 
-receiver  = 'Rcvr12_18'      # Ku-band receiver (12-18 GHz)
-beam      = '1'              # single-beam Ku receiver, beam 1
+receiver  = 'Rcvr12_18'      # Ku-band receiver (12-18 GHz), dual-beam
+beam      = 'B12'           # BOTH beams (proposal: 2 beams / 2 spectrometers)
 obstype   = 'Spectroscopy'
 backend   = 'VEGAS'
 
-# One VEGAS sub-band (spectral window) per NaCl v-state, all in one bank.
-# All sub-bands share bandwidth / nchan (VEGAS requirement).
-restfreq  = 13026.061, 12929.260, 12833.076, 12737.509, 12642.560
-#           v=0(+H79a)  v=1        v=2        v=3        v=4(+Na37Cl v=1)
-deltafreq = 0, 0, 0, 0, 0
+# Single VEGAS window on the primary line, replicated to both beams.
+restfreq  = 13026.061       # NaCl v=0 J=1-0  (LSR rest, MHz)  <-- PRIMARY
+dopplertrackfreq = 13026.061
 
-bandwidth = 187.5            # MHz per sub-band  (VEGAS 187.5-MHz mode)
+bandwidth = 187.5           # MHz  (VEGAS Mode 4)
 nchan     = 32768           # -> 5.72 kHz = 0.13 km/s at 13 GHz
-                            # (VERIFY the exact VEGAS mode # in AstrID's
-                            #  config tool -- 187.5 MHz / 32768 ch.)
 
-swmode    = "sp"            # switched power WITH cal  (frequency switching)
-swtype    = "fsw"          # frequency switching
+# In-band frequency switching (proposal: "In-Band Frequency Switching").
+swmode    = "sp"            # switched power WITH cal
 swper     = 0.4            # switching period (s)
-swfreq    = 0.0, -12.5     # in-band freq-switch throw (MHz); signal appears
-                          # in both phases -> fold in reduction
-tint      = 1.6           # integration (dump) time; 4 phases * 0.4 s.
-                          # At 8'/min scan rate -> 12.8"/sample < FWHM/4.
+swfreq    = 0.0, 14.305    # throw (MHz) = 2500 x 5.722 kHz channels.
+                          # 14.3 MHz > the ~8.7 MHz (+/-100 km/s) line
+                          # complex, so signal/reference do not overlap;
+                          # well inside the +/-93.75 MHz half-window.
+                          # (Integer #channels avoids the fsw artifact.)
+tint      = 1.6           # dump time; 4 phases x 0.4 s.  At 8'/min scan
+                          # rate -> 12.8"/sample < FWHM/4 (FWHM ~ 57").
 
 vlow      = 0
 vhigh     = 0
@@ -51,18 +44,11 @@ vframe    = "lsrk"         # LSR kinematic (standard for Galactic work)
 vdef      = "Radio"
 noisecal  = "lo"
 pol       = "Circular"
-spect.levels = 9
 
 # ---------------------------------------------------------------------
 # Ku-band line reference (MHz, LSR rest):
 #   NaCl v=0 1-0  13026.061   <-- PRIMARY target (emission)
-#   NaCl v=1 1-0  12929.260
-#   NaCl v=2 1-0  12833.076
-#   NaCl v=3 1-0  12737.509
-#   NaCl v=4 1-0  12642.560
-#   Na37Cl v=1    12653.734   (folds into the v=4 window)
-#   H79alpha      13088.850   (folds into the v=0 window)
-# Beam FWHM ~ 57" at 13 GHz.  See config_ProposalNumbers in README.
-# NOTE: vibrationally-excited NaCl lines sit in a region of severe RFI
-# (see proposal/technical.txt); treat them as bonus, not required.
+#   [window spans ~12932-13120 MHz; also contains H79alpha 13088.85]
+# Beam FWHM ~ 57" at 13 GHz.  Excited-vib NaCl (v>=1, 12.6-12.9 GHz) is
+# NOT in this window and is descoped (severe RFI region regardless).
 # ---------------------------------------------------------------------

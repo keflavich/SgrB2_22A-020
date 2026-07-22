@@ -16,3 +16,8 @@ AutoPeakFocus(frequency=26052.0, beamName="1")
 
 Break("Check pointing & focus solutions, then re-Configure for science.")
 Configure(PROJPATH + "/config_K_NaCl.py")
+
+# KFPA noise-diode strengths drift between sessions -- do a KFPA calibration
+# observation each session so Ta* scaling is reliable across all 7 beams.
+# (See the KFPA Observer's Guide; typically a short scan on a cal source.)
+Break("Perform the per-session KFPA calibration observation before mapping.")

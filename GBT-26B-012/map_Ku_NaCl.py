@@ -2,11 +2,14 @@
 GBT-26B-012 -- Ku-band (13 GHz) NaCl J=1-0 OTF map of Sgr B2(N).
 
 6' x 6' on-the-fly map centered on SgrB2N, run as an RA/Dec basketweave.
-One basketweave pass (RALongMap + DecLatMap) takes ~45-50 min including
-turnaround overhead and gives ~80 s of integration per beam.  The proposal
-target is ~4 mK rms per beam (native ~0.13 km/s, smoothed to ~1 km/s),
-which needs ~3600 s per point => ~40 h total => repeat the basketweave
-~45 times across the semester.
+Config: VEGAS Mode 4, single 187.5 MHz window on NaCl v=0 1-0, both beams.
+
+Proposal budget (GBT-26B-012): 10-sigma on the ~30 mK peak => ~3 mK rms
+per beam (native ~0.13 km/s, smoothed to ~1 km/s), ~2500 s per pointing.
+Total on-source ~29 h; ~36 h with overhead, split into 12 x 3 h sessions.
+Regenerate the exact scanDuration / row count with the GBT Mapping
+Calculator (the proposal's OTF calc gave ~19 s/beam per ~13-min map,
+131 repeats); the geometry below is a well-sampled starting point.
 
 Sequence per scheduling block:
     1. Run pointing_Ku.py first (pointing + focus + Configure).

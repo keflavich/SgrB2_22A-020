@@ -4,10 +4,14 @@ GBT-26B-012 -- K-band (26 GHz) NaCl J=2-1 OTF map of Sgr B2(N).
 6' x 6' on-the-fly map centered on SgrB2N, run as an RA/Dec basketweave
 with the KFPA (7 beams).  Target: map the NaCl 2-1 ABSORPTION against the
 Sgr B2 continuum and localize which continuum sources it absorbs against.
+Config: VEGAS Mode 4, single 187.5 MHz window on NaCl v=0 2-1, all 7 beams.
 
-Proposal sensitivity target ~4-6 mK rms per beam (native fine, smoothed to
-~1 km/s), reached most efficiently with in-band frequency switching and
-reference averaging: ~25 h total (see README / proposal technical.txt).
+Proposal budget (GBT-26B-012): 10-sigma on the ~15 mK peak => ~3 mK rms
+per beam.  ~6000 s/pointing single-beam, reduced to ~2200 s via the
+sqrt(7) KFPA gain.  Total on-source ~41 h; ~51 h with overhead, split
+into 17 x 3 h sessions.  Regenerate exact scanDuration / row count with
+the GBT Mapping Calculator (~19 s/beam per ~12-min map, 116 repeats);
+the geometry below is a well-sampled starting point.
 
 Sequence per scheduling block:
     1. Run pointing_K.py first (pointing + focus + Configure).
