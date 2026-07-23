@@ -4,7 +4,6 @@
 #
 # Nighttime / good-weather scheduling is preferred at 26 GHz.
 
-# ---- EDIT this to the project's script directory on the GBT system ----
 PROJPATH = "/users/aginsbur/GBT-26B-012"
 
 Catalog(PROJPATH + "/sgrb2_salt.cat")

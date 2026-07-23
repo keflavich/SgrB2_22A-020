@@ -30,11 +30,15 @@ basketweave). So a 3-h session is just:
 2. Repeat across sessions until the campaign total is reached:
    **131 maps (Ku)** and **116 maps (K)** — track the cumulative count.
 
+Each map is **one single-direction OTF pass**, and the loop **alternates
+RA-scanned and Dec-scanned passes** (`i % 2`) so coverage is basketweaved —
+orthogonal maps suppress scan-direction striping and 1/f drifts.
+
 Sgr B2 transits at low elevation from Green Bank; the in-loop pointing
 cadence (`point_every`) is a **floor**, especially at K-band.
 
-> **Before submitting:** edit `PROJPATH` at the top of each script to the
-> project's directory on the GBT filesystem (placeholder: `/users/aginsbur/GBT-26B-012`).
+Scripts are meant to run **verbatim**; they assume the project directory is
+`/users/aginsbur/GBT-26B-012` (`PROJPATH`).
 
 ## Spectral setup
 
@@ -65,13 +69,13 @@ alternate RA/Dec across repeats to basketweave.
   row sep **24″** (Nyquist), **16 rows**, **48.5 s/row** → **12.9 min/map**.
   10σ on the ~30 mK peak → ~3 mK/beam → ~2500 s/beam → **131 maps** →
   ~28 h on-source, **~36 h** with overhead → **12 × 3 h** sessions.
-- **K (KFPA)** — 10σ on the ~15 mK peak → ~3 mK/beam → ~6000 s/beam
-  single-beam, **~2200 s with the √7 KFPA gain** → **116 maps** → ~41 h
+- **K (KFPA)** — geometry reproduces the KFPA mapping-calculator output the
+  proposal reports: FWHM 28″, row sep **51.4″**, **8 rows**, **97 s/row** →
+  **12.9 min/map**. The coarse (~1.8 FWHM) rows fully sample because the
+  alt-az GBT **rotates the 7-beam hexagon** through each track and across
+  repeats, filling in between rows and giving the √7 gain. 10σ on the ~15 mK
+  peak → ~3 mK/beam → ~2200 s/beam (with √7) → **116 maps** → ~41 h
   on-source, **~51 h** with overhead → **17 × 3 h** sessions.
-  The script uses 12″ (single-beam Nyquist) rows as a *safe fallback*
-  (~50 min/map). **Run the KFPA branch of the mapping calculator** to set
-  the wider array row spacing (~36″ → ~18 min/map) that delivers the √7
-  gain the budget assumes — see the header note in `map_K_NaCl.py`.
 - **Total request: 87 h.**
 
 ## Observing notes / to confirm before submission

@@ -5,41 +5,40 @@ Target: map the NaCl 2-1 ABSORPTION against the Sgr B2 continuum and
 localize which continuum sources it absorbs against.  Config: VEGAS Mode 4,
 single 187.5 MHz window on NaCl v=0 2-1, all 7 KFPA beams, in-band freq sw.
 
-GEOMETRY -- IMPORTANT, CONFIRM WITH THE KFPA MAPPING CALCULATOR:
-The row spacing below (12" = Nyquist for the ~28" central beam) FULLY
-samples with a single beam and is therefore always safe, but it does NOT
-exploit the 7-beam KFPA footprint -- a single-beam 6' map at this spacing
-is ~50 min.  The proposal's sensitivity budget assumes the KFPA sqrt(7)
-gain, which comes from WIDENING the row spacing so the array interleaves
-(the KFPA branch of the GBT Mapping Calculator outputs the correct value;
-scaling the single-beam calc, ~36" rows -> ~18 min/map at ~19 s/beam).
---> Run the KFPA mapping calculator for the final `rowsep`/`scanDur`
-    before submission; keep `rowsep = 12"` only as a safe fallback.
+Geometry reproduces the KFPA mapping-calculator result the proposal reports
+(19 s/beam, ~13 min/map) for a 6'x6' map at 26.052 GHz:
+    FWHM 28.3" | slew 3.71"/s
+    row separation 51.4"  ->  8 rows | scanDuration 97.0 s/row
+    ==> 12.9 min on-source per (single-direction) map, ~19 s/beam.
+Why the coarse (~1.8 FWHM) rows still fully sample: the GBT is alt-az, so
+the 7-beam KFPA hexagon ROTATES on the sky through each track and, more so,
+across the 116 repeats -- the rotating array fills in between the rows and
+delivers the sqrt(7) sensitivity the budget assumes.  Sample spacing along
+the scan is 5.9" < FWHM/4 at tint=1.6 s, so no in-scan smearing.
 
 Proposal budget (GBT-26B-012): 10-sigma on the ~15 mK peak => ~3 mK/beam
 => ~6000 s/beam single-beam, ~2200 s/beam with the sqrt(7) KFPA gain =>
-116 map repeats => ~41 h on-source, ~51 h with overhead, 17 x 3 h sessions.
+116 maps => ~41 h on-source, ~51 h w/ overhead, 17 x 3 h sessions.
 
-Each "map" is one single-direction OTF pass; alternate RA/Dec to basketweave.
+Each map is ONE single-direction OTF pass; we ALTERNATE RA- and Dec-scanned
+passes to basketweave.  Run verbatim.  Track the cumulative count toward 116.
 """
 
-# ---- EDIT to the project's script directory on the GBT system ----
 PROJPATH = "/users/aginsbur/GBT-26B-012"
 
 Catalog(PROJPATH + "/sgrb2_salt.cat")
 Configure(PROJPATH + "/config_K_NaCl.py")
 
-# ---- geometry (see header: confirm rowsep/scanDur with KFPA calculator) ----
+# ---- calculator-matched geometry (KFPA, 7 beams) ----
 arcsec   = 1/3600.
 mapsize  = 6/60.          # 0.1 deg square
-rowsep   = 12.0*arcsec    # Nyquist for the 28" central beam (SAFE fallback).
-                          # KFPA-array value from the calculator is wider.
-scanDur  = 97.0           # s per row (6' / 3.71"/s), single-beam scaling.
+rowsep   = 51.43*arcsec   # 8 rows over 6'; rotating KFPA fills between rows
+scanDur  = 97.0           # s per row (6' / 3.71"/s)
 
 # ---- session / pointing control ----
-maps_this_session = 7     # tune to ~3 h once the KFPA map time is fixed. 116 total.
-point_every       = 2     # re-point every 2 maps -- K-band + low elevation
-                          # decorrelate fast; treat ~30 min as a hard floor.
+maps_this_session = 7     # ~7 x 12.9 min + pointing ~= 3 h.  116 total.
+point_every       = 2     # re-point every 2 maps (~26 min); K-band + low
+                          # elevation decorrelate fast -- treat as a floor.
 
 for i in range(maps_this_session):
 
@@ -49,6 +48,7 @@ for i in range(maps_this_session):
         Slew("SgrB2N")
         Balance()
 
+    # ALTERNATE orthogonal scan directions (basketweave):
     if i % 2 == 0:
         # RA-scanned rows, stepped in Dec:
         RALongMap("SgrB2N",
@@ -58,7 +58,7 @@ for i in range(maps_this_session):
             scanDuration = scanDur,
             beamName = "1")
     else:
-        # Dec-scanned rows, stepped in RA (basketweave):
+        # Dec-scanned rows, stepped in RA (orthogonal to the above):
         DecLatMap("SgrB2N",
             hLength = Offset("J2000", mapsize, 0.0, cosv=True),
             vLength = Offset("J2000", 0.0, mapsize, cosv=True),
