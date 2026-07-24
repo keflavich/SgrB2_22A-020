@@ -20,30 +20,41 @@ beam      = 'B12'           # BOTH beams (proposal: 2 beams / 2 spectrometers)
 obstype   = 'Spectroscopy'
 backend   = 'VEGAS'
 
-# Single VEGAS window on the primary line, replicated to both beams.
-restfreq  = 13026.061       # NaCl v=0 J=1-0  (LSR rest, MHz)  <-- PRIMARY
-dopplertrackfreq = 13026.061
 
-bandwidth = 187.5           # MHz  (VEGAS Mode 4)
+# Single VEGAS window on the primary line, replicated to both beams.
+# restfreq  = 13026.061       # NaCl v=0 J=1-0  (LSR rest, MHz)  <-- PRIMARY
+# bandwidth = 187.5           # MHz  (VEGAS Mode 4)
+
+# 4-tuning window covering other vibrationally excited lines (but we know they're not detected...)
+# H78a is at 13088
+# below 12706 RFI gets super ratty (in PRIMOS)
+# these middle two are pretty empty - we could pick something else - maybe H2CO or H213CO or something
+restfreq  = 13026.061, 12929.260, 12833.076, 13088.0
+bandwidth = 187.5, 187.5, 187.5, 187.5           # MHz  (VEGAS Mode 4)
+
+dopplertrackfreq = 13026.061
 nchan     = 32768           # -> 5.72 kHz = 0.13 km/s at 13 GHz
 
-# In-band frequency switching (proposal: "In-Band Frequency Switching").
+# In-band frequency switching
 swmode    = "sp"            # switched power WITH cal
 swper     = 0.4            # switching period (s)
-swfreq    = 0.0, 14.305    # throw (MHz) = 2500 x 5.722 kHz channels.
-                          # 14.3 MHz > the ~8.7 MHz (+/-100 km/s) line
-                          # complex, so signal/reference do not overlap;
-                          # well inside the +/-93.75 MHz half-window.
-                          # (Integer #channels avoids the fsw artifact.)
-tint      = 1.6           # dump time; 4 phases x 0.4 s.  At 8'/min scan
-                          # rate -> 12.8"/sample < FWHM/4 (FWHM ~ 57").
+
+# 11.7 MHz (recommended in docs: https://gbtdocs.readthedocs.io/en/latest/references/observing/configure.html#swfreq-float-float)
+# 270 km/s
+# known bright line at 13043 = 17 MHz.  _just_ misses the line
+swfreq    = 0.0, bandwidth*2**-4
+
+tint      = 0.4           # dump time; 4 phases x 0.4 s.  At 8'/min = 8"/s scan
+                          # rate -> 3.2"/sample < FWHM/4 (FWHM ~ 57").
+                          # minimum allowed is 11ms
+                          # "However, the integration time (tint), switching period (swper), and the frequency switching offset (swfreq) values must each be the same for all banks. "
 
 vlow      = 0
 vhigh     = 0
 vframe    = "lsrk"         # LSR kinematic (standard for Galactic work)
 vdef      = "Radio"
 noisecal  = "lo"
-pol       = "Circular"
+pol       = "Linear"
 
 # ---------------------------------------------------------------------
 # Ku-band line reference (MHz, LSR rest):

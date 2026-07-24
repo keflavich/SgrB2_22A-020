@@ -1,8 +1,7 @@
 # GBT-26B-012 -- K-band (KFPA) pointing & focus.  Run at the start of each
-# session and every ~30-45 min (K-band needs more frequent pointing than
-# Ku, especially at Sgr B2's low elevation and during the day).
-#
-# Nighttime / good-weather scheduling is preferred at 26 GHz.
+# session and every ~30-45 min if no-cal map scripts are used.  (K-band needs
+# more frequent pointing than Ku, especially at Sgr B2's low elevation and
+# during the day).
 
 PROJPATH = "/users/aginsbur/GBT-26B-012"
 

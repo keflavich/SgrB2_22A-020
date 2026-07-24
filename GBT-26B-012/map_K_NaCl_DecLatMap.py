@@ -38,14 +38,6 @@ maps_this_session = 4     # 4 x 34 min + pointing = 3h?
 point_every       = 1     # re-point every map (~34 min); K-band + low
                           # elevation 
 
-# RA-scanned rows, stepped in Dec:
-RALongMap("SgrB2N",
-    hLength = Offset("J2000", mapsize, 0.0, cosv=True),
-    vLength = Offset("J2000", 0.0, mapsize, cosv=True),
-    vDelta  = Offset("J2000", 0.0, rowsep, cosv=True),
-    scanDuration = scanDur,
-    beamName = "1")
-
 # Dec-scanned rows, stepped in RA (orthogonal to the above):
 DecLatMap("SgrB2N",
     hLength = Offset("J2000", mapsize, 0.0, cosv=True),

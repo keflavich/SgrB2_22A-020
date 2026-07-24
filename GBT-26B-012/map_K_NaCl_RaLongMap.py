@@ -45,11 +45,3 @@ RALongMap("SgrB2N",
     vDelta  = Offset("J2000", 0.0, rowsep, cosv=True),
     scanDuration = scanDur,
     beamName = "1")
-
-# Dec-scanned rows, stepped in RA (orthogonal to the above):
-DecLatMap("SgrB2N",
-    hLength = Offset("J2000", mapsize, 0.0, cosv=True),
-    vLength = Offset("J2000", 0.0, mapsize, cosv=True),
-    hDelta  = Offset("J2000", rowsep, 0.0, cosv=True),
-    scanDuration = scanDur,
-    beamName = "1")

@@ -7,12 +7,10 @@
 #   (0.065 km/s at 26 GHz), a SINGLE spectral window on NaCl v=0 2-1,
 #   ALL 7 KFPA beams, in-band frequency switching.
 #
-# 187.5 MHz gives ~2160 km/s of coverage -- far more than the ~200 km/s
-# Sgr B2 line-of-sight needs -- leaving ample room for a frequency-switch
+# 187.5 MHz gives ~2160 km/s of coverage leaving room for a frequency-switch
 # throw that fully clears the absorption complex (see swfreq below).
-# The 7-beam KFPA gives the sqrt(7) mapping-speed gain the proposal's
-# sensitivity budget assumes.  Native resolution is far finer than
-# needed; smooth to ~1 km/s in reduction.
+# The 7-beam KFPA gives the sqrt(7) mapping-speed gain.
+# Native resolution is far finer than needed; smooth to ~1 km/s in reduction.
 # =====================================================================
 
 receiver  = 'RcvrArray18_26'   # K-band Focal Plane Array (KFPA), 18.0-27.5 GHz.
@@ -31,7 +29,8 @@ nchan     = 32768           # -> 5.72 kHz = 0.065 km/s at 26 GHz
 # In-band frequency switching (proposal: "In-Band Frequency Switching").
 swmode    = "sp"            # switched power WITH cal
 swper     = 0.4
-swfreq    = 0.0, 28.610    # throw (MHz) = 5000 x 5.722 kHz channels.
+# 11 MHz.  there are no contaminant lines anywhere nearby.
+swfreq    = 0.0, bandwidth*2**-4    # throw (MHz) = 5000 x 5.722 kHz channels.
                           # 28.6 MHz > the ~17.4 MHz (+/-100 km/s) line
                           # complex, so the shifted reference clears the
                           # absorption; well inside the +/-93.75 MHz
@@ -45,14 +44,14 @@ vhigh     = 0
 vframe    = "lsrk"
 vdef      = "Radio"
 noisecal  = "lo"
-pol       = "Circular"
+pol       = "Linear"
 
 # ---------------------------------------------------------------------
 # K-band line reference (MHz, LSR rest):
 #   NaCl v=0 2-1  26051.898   <-- PRIMARY target (absorption)
 #   [window spans ~25958-26146 MHz]
 # Beam FWHM ~ 29" at 26 GHz.  Excited-vib NaCl 2-1 (v>=1, 25.3-25.9 GHz)
-# is NOT in this window and is descoped.
+# is NOT in this window
 #
 # KFPA CALIBRATION: the KFPA noise-diode strengths vary between sessions,
 # so each session must include a KFPA calibration observation (see the

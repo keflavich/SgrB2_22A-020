@@ -38,18 +38,28 @@ maps_this_session = 4     # 4 x 34 min + pointing = 3h?
 point_every       = 1     # re-point every map (~34 min); K-band + low
                           # elevation 
 
-# RA-scanned rows, stepped in Dec:
-RALongMap("SgrB2N",
-    hLength = Offset("J2000", mapsize, 0.0, cosv=True),
-    vLength = Offset("J2000", 0.0, mapsize, cosv=True),
-    vDelta  = Offset("J2000", 0.0, rowsep, cosv=True),
-    scanDuration = scanDur,
-    beamName = "1")
+for ii in range(maps_this_session):
 
-# Dec-scanned rows, stepped in RA (orthogonal to the above):
-DecLatMap("SgrB2N",
-    hLength = Offset("J2000", mapsize, 0.0, cosv=True),
-    vLength = Offset("J2000", 0.0, mapsize, cosv=True),
-    hDelta  = Offset("J2000", rowsep, 0.0, cosv=True),
-    scanDuration = scanDur,
-    beamName = "1")
+    if ii % point_every == 0:
+        AutoPeakFocus(frequency=26052.0, beamName="1")
+        Configure(PROJPATH + "/config_K_NaCl.py")
+        Slew("SgrB2N")
+        Balance()
+
+    # ALTERNATE orthogonal scan directions (basketweave):
+    if ii % 2 == 0:
+        # RA-scanned rows, stepped in Dec:
+        RALongMap("SgrB2N",
+            hLength = Offset("J2000", mapsize, 0.0, cosv=True),
+            vLength = Offset("J2000", 0.0, mapsize, cosv=True),
+            vDelta  = Offset("J2000", 0.0, rowsep, cosv=True),
+            scanDuration = scanDur,
+            beamName = "1")
+    else:
+        # Dec-scanned rows, stepped in RA (orthogonal to the above):
+        DecLatMap("SgrB2N",
+            hLength = Offset("J2000", mapsize, 0.0, cosv=True),
+            vLength = Offset("J2000", 0.0, mapsize, cosv=True),
+            hDelta  = Offset("J2000", rowsep, 0.0, cosv=True),
+            scanDuration = scanDur,
+            beamName = "1")
