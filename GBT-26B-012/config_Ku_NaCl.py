@@ -42,7 +42,7 @@ swper     = 0.4            # switching period (s)
 # 11.7 MHz (recommended in docs: https://gbtdocs.readthedocs.io/en/latest/references/observing/configure.html#swfreq-float-float)
 # 270 km/s
 # known bright line at 13043 = 17 MHz.  _just_ misses the line
-swfreq    = 0.0, bandwidth*2**-4
+swfreq    = 0.0, bandwidth[0]*2**-4
 
 tint      = 0.4           # dump time; 4 phases x 0.4 s.  At 8'/min = 8"/s scan
                           # rate -> 3.2"/sample < FWHM/4 (FWHM ~ 57").
