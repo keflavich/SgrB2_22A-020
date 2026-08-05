@@ -30,11 +30,12 @@ mapsize  = 6/60.          # 0.1 deg square (encompasses N, M, G0.693)
 rowsep   = 24.0*arcsec    # Nyquist at 57" beam -> 16 rows over 6'
 scanDur  = 48.5           # s per row (6' / 7.42"/s)
 
-# ---- session / pointing control ----
-maps_this_session = 11    # ~11 x 12.9 min + pointing ~= 3 h.  131 total.
-point_every       = 3     # re-point every 3 maps (~40 min); Sgr B2 is low.
+# One map per SB (the recommended GBT practice).  Pointing is NOT handled
+# here -- run pointing_Ku.py first, and again every ~40 min.
+Slew("SgrB2N")
+Balance()
 
-# Dec-scanned rows, stepped in RA (orthogonal to the above):
+# Dec-scanned rows, stepped in RA (orthogonal to the RALongMap version):
 DecLatMap("SgrB2N",
     hLength = Offset("J2000", mapsize, 0.0, cosv=True),
     vLength = Offset("J2000", 0.0, mapsize, cosv=True),

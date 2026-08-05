@@ -3,14 +3,20 @@
 # K-band (26 GHz) VEGAS + KFPA configuration: NaCl v=0 J=2-1 (ABSORPTION)
 # =====================================================================
 # Matches the submitted proposal resource table (GBT-26B-012.pdf, p.2):
-#   VEGAS Mode 4, 187.5 MHz bandwidth, ~32768 channels -> 5.7 kHz
+#   VEGAS Mode 4, 187.5 MHz bandwidth, 32768 channels -> 5.722 kHz
 #   (0.065 km/s at 26 GHz), a SINGLE spectral window on NaCl v=0 2-1,
 #   ALL 7 KFPA beams, in-band frequency switching.
 #
 # 187.5 MHz gives ~2160 km/s of coverage leaving room for a frequency-switch
-# throw that fully clears the absorption complex (see swfreq below).
-# The 7-beam KFPA gives the sqrt(7) mapping-speed gain.
-# Native resolution is far finer than needed; smooth to ~1 km/s in reduction.
+# throw (see swfreq below).  The 7-beam KFPA gives the sqrt(7) mapping-speed
+# gain.  Native resolution is far finer than needed; smooth to ~1 km/s in
+# reduction.
+#
+# !! ASTRID RULE !!  Configure() evaluates each "keyword = value" line in its
+# OWN namespace, so a value may NOT refer to another keyword.  Writing
+#     swfreq = 0.0, bandwidth*2**-4
+# fails with "NameError: name 'bandwidth' is not defined".  All values below
+# are self-contained literals.
 # =====================================================================
 
 receiver  = 'RcvrArray18_26'   # K-band Focal Plane Array (KFPA), 18.0-27.5 GHz.
@@ -20,40 +26,50 @@ obstype   = 'Spectroscopy'
 backend   = 'VEGAS'
 
 # Single VEGAS window on the primary line, replicated to all 7 beams.
+# (With 7 beams VEGAS allows exactly ONE bank per beam, so one window is the
+#  maximum here anyway.)
 restfreq  = 26051.898       # NaCl v=0 J=2-1  (LSR rest, MHz)  <-- PRIMARY
 dopplertrackfreq = 26051.898
 
 bandwidth = 187.5           # MHz  (VEGAS Mode 4)
-nchan     = 32768           # -> 5.72 kHz = 0.065 km/s at 26 GHz
+nchan     = 32768           # -> 5.722 kHz = 0.065 km/s at 26 GHz
 
 # In-band frequency switching (proposal: "In-Band Frequency Switching").
-swmode    = "sp"            # switched power WITH cal
-swper     = 0.4
-# 11 MHz.  there are no contaminant lines anywhere nearby.
-swfreq    = 0.0, bandwidth*2**-4    # throw (MHz) = 5000 x 5.722 kHz channels.
-                          # 28.6 MHz > the ~17.4 MHz (+/-100 km/s) line
-                          # complex, so the shifted reference clears the
-                          # absorption; well inside the +/-93.75 MHz
-                          # half-window.  (Wide 187.5 MHz window is what
-                          # makes a clean in-band throw possible here.)
-tint      = 1.6           # dump time; 4 phases x 0.4 s.  At 4'/min scan
-                          # rate -> 6.4"/sample < FWHM/4 (FWHM ~ 29").
+swmode    = 'sp'            # switched power WITH cal
+swtype    = 'fsw'           # REQUIRED to actually frequency switch when
+                            # swmode='sp'; without it nothing is switched.
+swper     = 0.4             # full switching cycle (s); 4 phases -> 0.1 s each
+swfreq    = 0.0, 11.71875   # throw = 187.5/16 MHz = exactly 2048 channels
+                            # of 5.722 kHz.  = 135 km/s at 26.05 GHz.
+                            # Well inside the +/-93.75 MHz half-window.
+                            # NOTE: 135 km/s does NOT fully clear a
+                            # +/-100 km/s absorption complex -- the reference
+                            # phase self-subtracts over ~35-100 km/s.  Use
+                            # swfreq = 0.0, 23.4375 (4096 chan, 270 km/s) if
+                            # a fully clean reference is required.
+tint      = 1.6             # dump time; 4 x swper.  At 3.71"/s scan rate
+                            # -> 5.9"/sample < FWHM/4 (FWHM ~ 29").
+                            # VEGAS Mode 4 minimum is 11 ms.
 
 vlow      = 0
 vhigh     = 0
-vframe    = "lsrk"
-vdef      = "Radio"
-noisecal  = "lo"
-pol       = "Linear"
+vframe    = 'lsrk'
+vdef      = 'Radio'
+noisecal  = 'lo'
+pol       = 'Circular'      # KFPA feeds have cooled polarizers producing
+                            # CIRCULAR polarization -- 'Linear' is wrong here.
 
 # ---------------------------------------------------------------------
 # K-band line reference (MHz, LSR rest):
 #   NaCl v=0 2-1  26051.898   <-- PRIMARY target (absorption)
 #   [window spans ~25958-26146 MHz]
 # Beam FWHM ~ 29" at 26 GHz.  Excited-vib NaCl 2-1 (v>=1, 25.3-25.9 GHz)
-# is NOT in this window
+# is NOT in this window.
 #
 # KFPA CALIBRATION: the KFPA noise-diode strengths vary between sessions,
 # so each session must include a KFPA calibration observation (see the
 # KFPA Observer's Guide / pointing_K.py note) for reliable Ta* scaling.
+#
+# Data rate: 32768 ch x 2 pol x 4 phases x 4 B = 1.05 MB/dump/bank;
+# 7 banks / 1.6 s = 4.6 MB/s = ~17 GB/hr.
 # ---------------------------------------------------------------------

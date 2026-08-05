@@ -33,12 +33,12 @@ rowsep   = 51.43 / 3 * arcsec # 24 rows: I want fully-sampled maps for each beam
 scanDur  = 97.0           # s per row (6' / 3.71"/s) at 1.6s sampling gives 5.9"/sample
 # 97s * 21 rows = 34m, so probably there's 5m extra for turnaround?
 
-# ---- session / pointing control ----
-maps_this_session = 4     # 4 x 34 min + pointing = 3h?
-point_every       = 1     # re-point every map (~34 min); K-band + low
-                          # elevation 
+# One map per SB (the recommended GBT practice).  Pointing is NOT handled
+# here -- run pointing_K.py first, and again every ~35-40 min.
+Slew("SgrB2N")
+Balance()
 
-# Dec-scanned rows, stepped in RA (orthogonal to the above):
+# Dec-scanned rows, stepped in RA (orthogonal to the RALongMap version):
 DecLatMap("SgrB2N",
     hLength = Offset("J2000", mapsize, 0.0, cosv=True),
     vLength = Offset("J2000", 0.0, mapsize, cosv=True),

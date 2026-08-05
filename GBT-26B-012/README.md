@@ -80,5 +80,28 @@ s/beam; alternate RA/Dec across repeats to basketweave.
 - **KFPA calibration:** include a per-session KFPA cal observation (diode
   strengths drift between sessions) — see `pointing_K.py`.
 - **Freq-switch throws** are set to clear the line and use an integer
-  number of channels
+  number of channels: 11.71875 MHz = 187.5/16 = exactly 2048 channels.
+  At K that is only **135 km/s**, which does *not* fully clear a
+  ±100 km/s absorption complex — switch to 23.4375 MHz (4096 chan,
+  270 km/s) if a clean reference is needed.
 - Edit `PROJPATH` in each script to the project's GBT script directory.
+
+## ASTRID gotchas (learned the hard way)
+
+- **Config values must be self-contained literals.** `Configure()` evaluates
+  each `keyword = value` line in its *own* namespace, so
+  `swfreq = 0.0, bandwidth*2**-4` fails with
+  `NameError: name 'bandwidth' is not defined`. Same for `bandwidth[0]*...`.
+- **`bandwidth` is a single float**, even with multiple `restfreq` values.
+- **`swtype = 'fsw'` is required** alongside `swmode = 'sp'`; without it
+  nothing is frequency-switched.
+- **`beam` takes comma-separated integers** (`'1,2'`), not `'B12'`.
+- **Both Rcvr12_18 and the KFPA are circular-polarization** receivers, so
+  `pol = 'Circular'`.
+- **Always `Balance()`** after the science `Configure()`, on-source, at the
+  observing elevation — and always re-`Configure()` after `AutoPeakFocus`,
+  which runs its own continuum config.
+- **VEGAS bank limits:** dual-beam ⇒ ≤4 banks/beam (so 4 windows × 2 Ku beams
+  = 8 banks is exactly at the limit); 5+ beams ⇒ 1 bank/beam (so the 7-beam
+  KFPA setup can only have one spectral window).
+- Raster legs must be ≥30 s (48.5 s Ku / 97 s K — fine).

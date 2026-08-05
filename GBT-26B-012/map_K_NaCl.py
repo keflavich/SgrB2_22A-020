@@ -33,10 +33,11 @@ rowsep   = 51.43 / 3 * arcsec # 24 rows: I want fully-sampled maps for each beam
 scanDur  = 97.0           # s per row (6' / 3.71"/s) at 1.6s sampling gives 5.9"/sample
 # 97s * 21 rows = 34m, so probably there's 5m extra for turnaround?
 
-# ---- session / pointing control ----
-maps_this_session = 4     # 4 x 34 min + pointing = 3h?
-point_every       = 1     # re-point every map (~34 min); K-band + low
-                          # elevation 
+# This SB does NOT self-manage pointing -- run pointing_K.py first.
+# (map_K_nacl_withCal.py is the self-managing looping version.)
+Slew("SgrB2N")
+Balance()
+Break("Check IF power levels before mapping.")
 
 # RA-scanned rows, stepped in Dec:
 RALongMap("SgrB2N",

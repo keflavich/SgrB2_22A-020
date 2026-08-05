@@ -6,14 +6,22 @@
 PROJPATH = "/users/aginsbur/GBT-26B-012"
 
 Catalog(PROJPATH + "/sgrb2_salt.cat")
-Configure(PROJPATH + "/config_K_NaCl.py")
 
-Slew("SgrB2N")
-# Point/focus with the reference beam near the science frequency.
+# AutoPeakFocus runs its own continuum configuration and picks its own nearby
+# bright calibrator, so do NOT Configure or Slew to the source first -- both
+# would be thrown away.
+# Point/focus near the science frequency.  KFPA beam pairs (3,7) and (4,6) sit
+# at equal elevation and are the recommended peak/focus beams; beam 1 (center)
+# also works.
 AutoPeakFocus(frequency=26052.0, beamName="1")
 
 Break("Check pointing & focus solutions, then re-Configure for science.")
+
+# ALWAYS reconfigure after AutoPeakFocus, then slew on-source and balance
+# at the observing elevation.
 Configure(PROJPATH + "/config_K_NaCl.py")
+Slew("SgrB2N")
+Balance()
 
 # KFPA noise-diode strengths drift between sessions -- do a KFPA calibration
 # observation each session so Ta* scaling is reliable across all 7 beams.
