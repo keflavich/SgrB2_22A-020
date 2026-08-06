@@ -35,26 +35,32 @@ backend   = 'VEGAS'
 # window without dropping to a single beam.
 restfreq  = 13026.061, 12929.260, 12833.076, 13088.0
 bandwidth = 187.5           # MHz (VEGAS Mode 4), single value for all windows
-dopplertrackfreq = 13026.061
+dopplertrackfreq = 13026.061   # CHECK: restfreq[0]
 nchan     = 32768           # -> 5.722 kHz = 0.13 km/s at 13 GHz
 
 # In-band frequency switching
 swmode    = 'sp'            # switched power WITH cal
 swtype    = 'fsw'           # REQUIRED to actually frequency switch when
                             # swmode='sp'; without it nothing is switched.
-swper     = 0.4             # full switching cycle (s); 4 phases -> 0.1 s each
-swfreq    = 0.0, 11.71875   # throw = 187.5/16 MHz = exactly 2048 channels of
+swper     = 0.8             # full switching cycle (s).  4 phases -> 200 ms
+                            # each; VEGAS blanks ~11 ms (the Mode 4 minimum
+                            # integration) at every phase transition, so this
+                            # loses ~5.5%.  swper=0.4 gave 100 ms phases and
+                            # tripped ASTRID's ">10% of your data will be
+                            # blanked in BankX using mode MODE4" warning.
+swfreq    = 0.0, 11.71875   # CHECK: (0.0, bandwidth*2**-4)
+                            # CHECK: (0.0, 2048*chanwidth)
+                            # throw = 187.5/16 MHz = exactly 2048 channels of
                             # 5.722 kHz = 270 km/s at 13.026 GHz.
                             # Known bright line at 13043 (+17 MHz) is _just_
                             # missed.  Recommended value in the configure docs:
                             # https://gbtdocs.readthedocs.io/en/latest/references/observing/configure.html#swfreq-float-float
-tint      = 0.4             # dump time = 1 x swper.  At 6'/48.5 s = 7.42"/s
-                            # -> 3.0"/sample, far finer than FWHM/4 (~14").
+tint      = 1.6             # CHECK: 2*swper
+                            # dump time.  At 6'/48.5 s = 7.42"/s
+                            # -> 11.9"/sample, still inside FWHM/4 (14.2").
                             # VEGAS Mode 4 minimum is 11 ms.
-                            # WARNING: this produces ~21 MB/s = ~75 GB/hr
-                            # across 8 banks (~2.7 TB for the campaign).
-                            # tint = 1.0 still gives 7.4"/sample and cuts
-                            # that by 2.5x.
+                            # This also drops the 8-bank data rate from
+                            # ~21 MB/s (tint=0.4) to ~5.2 MB/s = ~19 GB/hr.
                             # "the integration time (tint), switching period
                             #  (swper), and the frequency switching offset
                             #  (swfreq) values must each be the same for all

@@ -5,15 +5,17 @@ Target: map the NaCl 2-1 ABSORPTION against the Sgr B2 continuum and
 localize which continuum sources it absorbs against.  Config: VEGAS Mode 4,
 single 187.5 MHz window on NaCl v=0 2-1, all 7 KFPA beams, in-band freq sw.
 
-From proposal: (19 s/beam, ~13 min/map) for a 6'x6' map at 26.052 GHz:
-    FWHM 28.3" | slew 3.71"/s
-    row separation 51.4"  ->  8 rows | scanDuration 97.0 s/row
-    ==> 12.9 min on-source per (single-direction) map, ~19 s/beam.
-Sample spacing along the scan is 5.9" < FWHM/4 at tint=1.6 s.
+6'x6' map at 26.052 GHz (KFPA, all 7 beams):
+    FWHM 28.5" | slew 3.71"/s
+    row separation 13.85" = FWHM/2 (Nyquist)  ->  27 rows | 97.0 s/row
+    ==> 43.7 min on-source per (single-direction) map.
+Sample spacing along the scan is 5.9" < FWHM/4 (7.1") at tint=1.6 s, so
+every one of the 7 beams fully samples the map on its own.
 
-10-sigma on the ~15 mK peak => ~3 mK/beam
-=> ~6000 s/beam single-beam, ~2200 s/beam with the sqrt(7) KFPA gain =>
-116 maps => ~41 h on-source, ~51 h w/ overhead, 17 x 3 h sessions.
+10-sigma on the ~15 mK peak => ~3 mK/beam.  Integration per sky point scales
+with map duration, so the invariant is TOTAL on-source hours, not the map
+count: N_maps = (total on-source time) / 43.7 min.  Multiply any map count
+tracked against the old 22-row / 35.6-min geometry by 35.6/43.7 = 0.82.
 
 Each map is ONE single-direction OTF pass; we ALTERNATE RA- and Dec-scanned
 passes to basketweave.  Run verbatim.  Track the cumulative count toward 116.
@@ -25,18 +27,22 @@ PROJPATH = "/users/aginsbur/GBT-26B-012"
 Catalog(PROJPATH + "/sgrb2_salt.cat")
 Configure(PROJPATH + "/config_K_NaCl.py")
 
-# ---- calculator-matched geometry (KFPA, 7 beams) ----
-arcsec   = 1/3600.
+# ---- map geometry (KFPA, 7 beams) ----
 mapsize  = 6/60.          # 0.1 deg square
-rowsep   = 51.43*arcsec   # 8 rows over 6'; rotating KFPA fills between rows
-rowsep   = 51.43 / 3 * arcsec # 24 rows: I want fully-sampled maps for each beam.  34m per scan is OK
-scanDur  = 97.0           # s per row (6' / 3.71"/s) at 1.6s sampling gives 5.9"/sample
-# 97s * 21 rows = 34m, so probably there's 5m extra for turnaround?
+# Rows must be <= FWHM/2 = 14.2" apart (FWHM 28.5" at 26.05 GHz) for each
+# beam to fully sample the map on its own.  mapsize/26 = 13.85" satisfies
+# that AND gives exactly 27 rows (mapsize/rowsep + 1), so the map edge lands
+# where intended.  The old 51.43/3 = 17.14" was 20% coarser than Nyquist and
+# produced a ragged 21.9994 rows.
+rowsep   = mapsize / 26.  # 13.85" -> 27 rows, fully sampled in every beam
+scanDur  = 97.0           # s per row (6' / 3.71"/s); at tint=1.6 s that is
+                          # 5.9"/sample, inside FWHM/4 = 7.1"
+# 27 rows x 97 s = 43.7 min of on-sky time per map, plus turnarounds.
 
 # ---- session / pointing control ----
-maps_this_session = 4     # 4 x 34 min + pointing = 3h?
-point_every       = 1     # re-point every map (~34 min); K-band + low
-                          # elevation 
+maps_this_session = 3     # 3 x (43.7 min + ~5.5 min point/focus) = ~2.5 h
+point_every       = 1     # re-point every map (~44 min); K-band + low
+                          # elevation
 
 for ii in range(maps_this_session):
 

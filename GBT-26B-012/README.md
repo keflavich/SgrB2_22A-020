@@ -28,7 +28,9 @@ basketweave). So a 3-h session is just:
 1. `map_<band>_NaCl.py` — set `maps_this_session` to fill ~3 h.
    (`pointing_<band>.py` remains available for a standalone point/focus check.)
 2. Repeat across sessions until the campaign total is reached:
-   **131 maps (Ku)** and **116 maps (K)** — track the cumulative count.
+   **131 maps (Ku)** at 12.9 min each, and for K a count derived from the
+   on-source budget at **43.7 min/map** (see the K bullet below) — track the
+   cumulative count.
 
 Each map is **one single-direction OTF pass**, and the loop **alternates
 RA-scanned and Dec-scanned passes** (`i % 2`) so coverage is basketweaved —
@@ -66,13 +68,20 @@ s/beam; alternate RA/Dec across repeats to basketweave.
   row sep 24″ (Nyquist), 16 rows, 48.5 s/row → 12.9 min/map.
   10σ on the ~30 mK peak → ~3 mK/beam → ~2500 s/beam → 131 maps →
   ~28 h on-source, ~36 h with overhead → 12 × 3 h sessions.
-- **K (KFPA)** — FWHM 28″, row sep 51.4″ is the default but I reduced it by 1/3
-  to get fully-sampled maps per beam, 8 rows -> 24 rows, 97 s/row →
-  12.9 min/map -> 39m/map. The coarse (~1.8 FWHM) rows could fully sample using
-  different beams from the 7-beam KFPA, but I want fully-sampled maps in each
-  beam. 10σ on the ~15 mK peak → ~3 mK/beam → ~2200 s/beam (with √7) → 116 maps
-  (39 using the fully-sampled approach)
-  → ~41 h on-source, ~51 h with overhead → 17 × 3 h sessions.
+- **K (KFPA)** — FWHM 28.5″, row sep **13.85″ = FWHM/2**, 27 rows,
+  97 s/row → **43.7 min/map**. The default 51.4″ row step relies on different
+  beams of the 7-beam KFPA filling the gaps; I want each beam fully sampled on
+  its own, which needs Nyquist spacing. (51.43/3 = 17.14″ was an earlier
+  attempt at this — it is still 20% coarser than Nyquist, and gave a ragged
+  21.9994 rows. `mapsize/26` fixes both.) 10σ on the ~15 mK peak → ~3 mK/beam.
+  → ~2.5 h/session at 3 maps + point/focus each.
+
+  **Integration per sky point scales with map duration, so the invariant is
+  total on-source hours, not map count**: `N_maps = total_on_source / 43.7 min`.
+  Multiply any count tracked against the older 22-row/35.6-min geometry by
+  35.6/43.7 = 0.82. Note the "~41 h on-source" figure below never reconciled
+  with either the 116-map or the 39-map line — re-derive it from the
+  allocation before committing to a session count.
 - Total allocation: 87 h.
 
 ## Observing notes / to confirm before submission
@@ -85,6 +94,55 @@ s/beam; alternate RA/Dec across repeats to basketweave.
   ±100 km/s absorption complex — switch to 23.4375 MHz (4096 chan,
   270 km/s) if a clean reference is needed.
 - Edit `PROJPATH` in each script to the project's GBT script directory.
+
+## `validate_scripts.py` — offline self-consistency check
+
+**Run this after editing any config, before uploading to ASTRID:**
+
+```
+python validate_scripts.py [-v]      # exits nonzero on ERROR
+```
+
+ASTRID's validator only checks syntax and legality of each config *in
+isolation*. Because `Configure()` evaluates every `keyword = value` line in its
+own namespace, every derived number has to be typed in as a hand-computed
+literal — and nothing on the telescope will notice when one drifts out of sync.
+This script re-derives them.
+
+Consistency relations are written into the configs themselves as `CHECK:`
+annotations, evaluated against the *full* config namespace:
+
+```python
+swfreq = 0.0, 11.71875      # CHECK: (0.0, bandwidth*2**-4)
+                            # CHECK: (0.0, 2048*chanwidth)
+tint   = 1.6                # CHECK: 2*swper
+```
+
+Change `bandwidth` and forget `swfreq`, and you get
+`the hand-typed literal has drifted from its formula`. Helpers available inside
+a `CHECK:` expression: `chanwidth` (MHz), `chanvel` (km/s), `fwhm` (arcsec),
+`primaryfreq`, `nbeams`, `nwindows`, `c_kms`, plus everything in `math`.
+
+On top of that it checks, without a telescope:
+
+- ASTRID's per-keyword evaluation — reproduces the `NameError` locally
+- enumerated keyword values; receiver frequency range, beam count, native pol
+- the VEGAS mode table: `bandwidth`/`nchan` is a real mode, `tint` above the
+  mode minimum, `tint` an integer multiple of `swper`
+- **switching-phase blanking** — models the blank as one mode-minimum
+  integration, which reproduces ASTRID's own
+  *"more than 10% of your data will be blanked in BankX"* warning
+- freq-switch throw: integer channels, stays inside the half-window, km/s
+- VEGAS bank budget (windows × beams against the per-beam routing limit)
+- data rate and GB/map/hour
+- catalog format, and that every source a scan names actually exists
+- SB command ordering: `Configure` → `Slew` → `Balance` → scans, and that
+  `AutoPeakFocus` is always followed by a re-`Configure`
+- map geometry *against the config*: scan rate, sample spacing vs FWHM/4,
+  row step vs Nyquist, integer row count, the 30 s scan-leg minimum
+
+It emulates the ASTRID commands rather than calling them, so it runs anywhere
+with a stock Python (2 or 3), no GBT software needed.
 
 ## ASTRID gotchas (learned the hard way)
 
@@ -105,3 +163,7 @@ s/beam; alternate RA/Dec across repeats to basketweave.
   = 8 banks is exactly at the limit); 5+ beams ⇒ 1 bank/beam (so the 7-beam
   KFPA setup can only have one spectral window).
 - Raster legs must be ≥30 s (48.5 s Ku / 97 s K — fine).
+- **`swper` must be long enough that VEGAS blanking is <10%.** With
+  `swmode='sp'` there are 4 phases per cycle, and Mode 4 blanks ~11 ms at each
+  transition, so `swper=0.4` → 100 ms/phase → 11% blanked and ASTRID warns.
+  Both bands now use `swper=0.8` (200 ms/phase, ~5.5%) with `tint=1.6`.

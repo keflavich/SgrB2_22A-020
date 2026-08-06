@@ -29,7 +29,7 @@ backend   = 'VEGAS'
 # (With 7 beams VEGAS allows exactly ONE bank per beam, so one window is the
 #  maximum here anyway.)
 restfreq  = 26051.898       # NaCl v=0 J=2-1  (LSR rest, MHz)  <-- PRIMARY
-dopplertrackfreq = 26051.898
+dopplertrackfreq = 26051.898   # CHECK: restfreq
 
 bandwidth = 187.5           # MHz  (VEGAS Mode 4)
 nchan     = 32768           # -> 5.722 kHz = 0.065 km/s at 26 GHz
@@ -38,8 +38,15 @@ nchan     = 32768           # -> 5.722 kHz = 0.065 km/s at 26 GHz
 swmode    = 'sp'            # switched power WITH cal
 swtype    = 'fsw'           # REQUIRED to actually frequency switch when
                             # swmode='sp'; without it nothing is switched.
-swper     = 0.4             # full switching cycle (s); 4 phases -> 0.1 s each
-swfreq    = 0.0, 11.71875   # throw = 187.5/16 MHz = exactly 2048 channels
+swper     = 0.8             # full switching cycle (s).  4 phases -> 200 ms
+                            # each; VEGAS blanks ~11 ms (the Mode 4 minimum
+                            # integration) at every phase transition, so this
+                            # loses ~5.5%.  swper=0.4 gave 100 ms phases and
+                            # tripped ASTRID's ">10% of your data will be
+                            # blanked in BankX using mode MODE4" warning.
+swfreq    = 0.0, 11.71875   # CHECK: (0.0, bandwidth*2**-4)
+                            # CHECK: (0.0, 2048*chanwidth)
+                            # throw = 187.5/16 MHz = exactly 2048 channels
                             # of 5.722 kHz.  = 135 km/s at 26.05 GHz.
                             # Well inside the +/-93.75 MHz half-window.
                             # NOTE: 135 km/s does NOT fully clear a
@@ -47,8 +54,9 @@ swfreq    = 0.0, 11.71875   # throw = 187.5/16 MHz = exactly 2048 channels
                             # phase self-subtracts over ~35-100 km/s.  Use
                             # swfreq = 0.0, 23.4375 (4096 chan, 270 km/s) if
                             # a fully clean reference is required.
-tint      = 1.6             # dump time; 4 x swper.  At 3.71"/s scan rate
-                            # -> 5.9"/sample < FWHM/4 (FWHM ~ 29").
+tint      = 1.6             # CHECK: 2*swper
+                            # dump time.  At 3.71"/s scan rate
+                            # -> 5.9"/sample < FWHM/4 (FWHM ~ 28.5").
                             # VEGAS Mode 4 minimum is 11 ms.
 
 vlow      = 0
@@ -72,4 +80,8 @@ pol       = 'Circular'      # KFPA feeds have cooled polarizers producing
 #
 # Data rate: 32768 ch x 2 pol x 4 phases x 4 B = 1.05 MB/dump/bank;
 # 7 banks / 1.6 s = 4.6 MB/s = ~17 GB/hr.
+#
+# Run validate_scripts.py after editing anything here: the CHECK: annotations
+# above are machine-checked against the literals, since ASTRID itself cannot
+# evaluate cross-keyword arithmetic.
 # ---------------------------------------------------------------------
