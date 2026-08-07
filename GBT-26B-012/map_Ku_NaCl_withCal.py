@@ -32,6 +32,7 @@ scanDur  = 48.5           # s per row (6' / 7.42"/s)
 
 # ---- session / pointing control ----
 maps_this_session = 11    # ~11 x 12.9 min + pointing ~= 3 h.  131 total.
+maps_this_session = 1000  # let the operator / observer quit at the end of time
 point_every       = 3     # re-point every 3 maps (~40 min); Sgr B2 is low.
 
 for ii in range(maps_this_session):

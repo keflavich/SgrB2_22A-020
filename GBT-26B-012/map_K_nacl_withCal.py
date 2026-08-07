@@ -41,6 +41,7 @@ scanDur  = 97.0           # s per row (6' / 3.71"/s); at tint=1.6 s that is
 
 # ---- session / pointing control ----
 maps_this_session = 3     # 3 x (43.7 min + ~5.5 min point/focus) = ~2.5 h
+maps_this_session = 1000  # let the operator / observer quit at the end of time
 point_every       = 1     # re-point every map (~44 min); K-band + low
                           # elevation
 
