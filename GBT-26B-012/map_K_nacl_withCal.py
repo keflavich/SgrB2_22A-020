@@ -47,7 +47,7 @@ point_every       = 1     # re-point every map (~44 min); K-band + low
 for ii in range(maps_this_session):
 
     if ii % point_every == 0:
-        AutoPeakFocus(frequency=26052.0, beamName="1")
+        AutoPeakFocus(beamName="1")
         Configure(PROJPATH + "/config_K_NaCl.py")
         Slew("SgrB2N")
         Balance()

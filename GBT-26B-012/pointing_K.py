@@ -13,7 +13,7 @@ Catalog(PROJPATH + "/sgrb2_salt.cat")
 # Point/focus near the science frequency.  KFPA beam pairs (3,7) and (4,6) sit
 # at equal elevation and are the recommended peak/focus beams; beam 1 (center)
 # also works.
-AutoPeakFocus(frequency=26052.0, beamName="1")
+AutoPeakFocus(beamName="1")
 
 Break("Check pointing & focus solutions, then re-Configure for science.")
 

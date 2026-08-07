@@ -11,7 +11,7 @@ Catalog(PROJPATH + "/sgrb2_salt.cat")
 # bright pointing source, so do NOT Configure or Slew to the source first --
 # both would be thrown away.  Point near the science line frequency so the
 # pointing model is well matched.
-AutoPeakFocus(frequency=13026.0, beamName="1")
+AutoPeakFocus(beamName="1")
 
 Break("Check pointing & focus solutions, then re-Configure for science.")
 

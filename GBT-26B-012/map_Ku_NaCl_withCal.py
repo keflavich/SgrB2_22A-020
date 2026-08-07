@@ -37,7 +37,7 @@ point_every       = 3     # re-point every 3 maps (~40 min); Sgr B2 is low.
 for ii in range(maps_this_session):
 
     if ii % point_every == 0:
-        AutoPeakFocus(frequency=13026.0, beamName="1")
+        AutoPeakFocus(beamName="1")
         Configure(PROJPATH + "/config_Ku_NaCl.py")
         Slew("SgrB2N")
         Balance()
